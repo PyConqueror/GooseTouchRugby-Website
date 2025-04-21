@@ -1,0 +1,34 @@
+<svg width="550" height="310" viewBox="0 0 550 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="550" height="310" fill="#FEF9E7"/>
+  
+  <!-- Rugby field background -->
+  <rect x="50" y="50" width="450" height="210" fill="#F4D03F" opacity="0.2"/>
+  <line x1="275" y1="50" x2="275" y2="260" stroke="#F4D03F" stroke-width="2"/>
+  <circle cx="275" cy="155" r="30" stroke="#F4D03F" stroke-width="2" fill="none"/>
+  
+  <!-- Team huddle (simplified) -->
+  <circle cx="200" cy="155" r="100" fill="#F4D03F" opacity="0.1"/>
+  
+  <!-- Players in huddle -->
+  <circle cx="230" cy="120" r="15" fill="#F4D03F"/>
+  <circle cx="200" cy="100" r="15" fill="#F4D03F"/>
+  <circle cx="170" cy="120" r="15" fill="#F4D03F"/>
+  <circle cx="155" cy="155" r="15" fill="#F4D03F"/>
+  <circle cx="170" cy="190" r="15" fill="#F4D03F"/>
+  <circle cx="200" cy="210" r="15" fill="#F4D03F"/>
+  <circle cx="230" cy="190" r="15" fill="#F4D03F"/>
+  <circle cx="245" cy="155" r="15" fill="#F4D03F"/>
+  
+  <!-- Coach with clipboard -->
+  <circle cx="350" cy="155" r="20" fill="#F4D03F"/>
+  <rect x="340" y="175" width="20" height="40" fill="#F4D03F"/>
+  <rect x="370" y="145" width="30" height="40" fill="white" stroke="#F4D03F" stroke-width="2"/>
+  <line x1="375" y1="155" x2="395" y2="155" stroke="#F4D03F" stroke-width="2"/>
+  <line x1="375" y1="165" x2="395" y2="165" stroke="#F4D03F" stroke-width="2"/>
+  <line x1="375" y1="175" x2="395" y2="175" stroke="#F4D03F" stroke-width="2"/>
+  
+  <!-- Team logo -->
+  <circle cx="450" cy="80" r="25" fill="#F4D03F"/>
+  <path d="M460 70C460 70 455 65 450 65C445 65 440 70 440 70C440 70 435 75 440 85C445 95 450 95 450 95C450 95 455 95 460 85C465 75 460 70 460 70Z" fill="white"/>
+  <circle cx="445" cy="75" r="3" fill="#F4D03F"/>
+</svg>

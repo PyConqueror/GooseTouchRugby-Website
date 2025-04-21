@@ -1,0 +1,17 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="60" fill="#F4D03F" stroke="black" stroke-width="4"/>
+  <!-- Sun rays -->
+  <line x1="100" y1="20" x2="100" y2="0" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <line x1="100" y1="200" x2="100" y2="180" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <line x1="20" y1="100" x2="0" y2="100" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <line x1="200" y1="100" x2="180" y2="100" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <line x1="34" y1="34" x2="20" y2="20" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <line x1="180" y1="180" x2="166" y2="166" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <line x1="34" y1="166" x2="20" y2="180" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  <line x1="180" y1="20" x2="166" y2="34" stroke="black" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Sun face -->
+  <circle cx="80" cy="90" r="8" fill="black"/>
+  <circle cx="120" cy="90" r="8" fill="black"/>
+  <path d="M75 120 Q100 140 125 120" stroke="black" stroke-width="4" stroke-linecap="round" fill="none"/>
+</svg>

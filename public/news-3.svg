@@ -1,0 +1,76 @@
+<svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="200" fill="#FEF9E7"/>
+  
+  <!-- Background - community event -->
+  <rect x="0" y="0" width="400" height="200" fill="#FEF9E7"/>
+  <rect x="20" y="20" width="360" height="160" rx="10" fill="#FFFFFF" stroke="#F4D03F" stroke-width="2"/>
+  
+  <!-- Rugby field simplified -->
+  <rect x="50" y="50" width="300" height="100" fill="#F4D03F" opacity="0.1"/>
+  <line x1="200" y1="50" x2="200" y2="150" stroke="#F4D03F" stroke-width="1"/>
+  <circle cx="200" cy="100" r="20" stroke="#F4D03F" stroke-width="1" fill="none"/>
+  
+  <!-- People silhouettes representing community -->
+  <!-- Group 1 -->
+  <circle cx="80" cy="80" r="8" fill="#F4D03F"/>
+  <path d="M80 88 L80 110" stroke="#F4D03F" stroke-width="4"/>
+  <path d="M70 95 L90 95" stroke="#F4D03F" stroke-width="4"/>
+  <path d="M75 110 L70 120" stroke="#F4D03F" stroke-width="3"/>
+  <path d="M85 110 L90 120" stroke="#F4D03F" stroke-width="3"/>
+  
+  <circle cx="110" cy="85" r="8" fill="#F4D03F"/>
+  <path d="M110 93 L110 115" stroke="#F4D03F" stroke-width="4"/>
+  <path d="M100 100 L120 100" stroke="#F4D03F" stroke-width="4"/>
+  <path d="M105 115 L100 125" stroke="#F4D03F" stroke-width="3"/>
+  <path d="M115 115 L120 125" stroke="#F4D03F" stroke-width="3"/>
+  
+  <!-- Group 2 -->
+  <circle cx="150" cy="75" r="6" fill="#F4D03F"/>
+  <path d="M150 81 L150 100" stroke="#F4D03F" stroke-width="3"/>
+  <path d="M142 90 L158 90" stroke="#F4D03F" stroke-width="3"/>
+  <path d="M146 100 L142 110" stroke="#F4D03F" stroke-width="2"/>
+  <path d="M154 100 L158 110" stroke="#F4D03F" stroke-width="2"/>
+  
+  <circle cx="170" cy="80" r="6" fill="#F4D03F"/>
+  <path d="M170 86 L170 105" stroke="#F4D03F" stroke-width="3"/>
+  <path d="M162 95 L178 95" stroke="#F4D03F" stroke-width="3"/>
+  <path d="M166 105 L162 115" stroke="#F4D03F" stroke-width="2"/>
+  <path d="M174 105 L178 115" stroke="#F4D03F" stroke-width="2"/>
+  
+  <!-- Group 3 -->
+  <circle cx="230" cy="85" r="7" fill="#F4D03F"/>
+  <path d="M230 92 L230 112" stroke="#F4D03F" stroke-width="3.5"/>
+  <path d="M220 100 L240 100" stroke="#F4D03F" stroke-width="3.5"/>
+  <path d="M225 112 L220 122" stroke="#F4D03F" stroke-width="2.5"/>
+  <path d="M235 112 L240 122" stroke="#F4D03F" stroke-width="2.5"/>
+  
+  <circle cx="260" cy="80" r="7" fill="#F4D03F"/>
+  <path d="M260 87 L260 107" stroke="#F4D03F" stroke-width="3.5"/>
+  <path d="M250 95 L270 95" stroke="#F4D03F" stroke-width="3.5"/>
+  <path d="M255 107 L250 117" stroke="#F4D03F" stroke-width="2.5"/>
+  <path d="M265 107 L270 117" stroke="#F4D03F" stroke-width="2.5"/>
+  
+  <!-- Group 4 - children -->
+  <circle cx="300" cy="90" r="5" fill="#F4D03F"/>
+  <path d="M300 95 L300 110" stroke="#F4D03F" stroke-width="2.5"/>
+  <path d="M293 100 L307 100" stroke="#F4D03F" stroke-width="2.5"/>
+  <path d="M296 110 L293 118" stroke="#F4D03F" stroke-width="2"/>
+  <path d="M304 110 L307 118" stroke="#F4D03F" stroke-width="2"/>
+  
+  <circle cx="320" cy="85" r="5" fill="#F4D03F"/>
+  <path d="M320 90 L320 105" stroke="#F4D03F" stroke-width="2.5"/>
+  <path d="M313 95 L327 95" stroke="#F4D03F" stroke-width="2.5"/>
+  <path d="M316 105 L313 113" stroke="#F4D03F" stroke-width="2"/>
+  <path d="M324 105 L327 113" stroke="#F4D03F" stroke-width="2"/>
+  
+  <!-- Rugby ball -->
+  <ellipse cx="200" cy="140" rx="15" ry="7.5" fill="#964B00" transform="rotate(-15 200 140)"/>
+  
+  <!-- Event banner -->
+  <path d="M50 30 L350 30" stroke="#F4D03F" stroke-width="2"/>
+  <text x="110" y="40" font-family="Arial" font-size="12" font-weight="bold" fill="#F4D03F">COMMUNITY RUGBY DAY</text>
+  
+  <!-- Success badge -->
+  <circle cx="340" cy="160" r="20" fill="#F4D03F"/>
+  <text x="330" y="165" font-family="Arial" font-size="10" font-weight="bold" fill="white">200+</text>
+</svg>

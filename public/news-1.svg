@@ -1,0 +1,55 @@
+<svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="200" fill="#FEF9E7"/>
+  
+  <!-- Rugby field background -->
+  <rect x="20" y="20" width="360" height="160" fill="#F4D03F" opacity="0.1"/>
+  <line x1="200" y1="20" x2="200" y2="180" stroke="#F4D03F" stroke-width="2"/>
+  <circle cx="200" cy="100" r="30" stroke="#F4D03F" stroke-width="2" fill="none"/>
+  
+  <!-- Training session visualization -->
+  <!-- Coach -->
+  <circle cx="100"  fill="none"/>
+  
+  <!-- Training session visualization -->
+  <!-- Coach -->
+  <circle cx="100" cy="100" r="15" fill="#F4D03F"/>
+  <rect x="90" y="115" width="20" height="30" fill="#F4D03F"/>
+  <line x1="90" y1="125" x2="70" y2="135" stroke="#F4D03F" stroke-width="4" stroke-linecap="round"/>
+  <line x1="110" y1="125" x2="130" y2="135" stroke="#F4D03F" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Whistle -->
+  <line x1="115" y1="100" x2="135" y2="100" stroke="#F4D03F" stroke-width="2"/>
+  <circle cx="140" cy="100" r="5" fill="#F4D03F"/>
+  
+  <!-- Players in training -->
+  <circle cx="200" cy="60" r="10" fill="#F4D03F"/>
+  <rect x="195" y="70" width="10" height="20" fill="#F4D03F"/>
+  
+  <circle cx="240" cy="80" r="10" fill="#F4D03F"/>
+  <rect x="235" y="90" width="10" height="20" fill="#F4D03F"/>
+  
+  <circle cx="280" cy="100" r="10" fill="#F4D03F"/>
+  <rect x="275" y="110" width="10" height="20" fill="#F4D03F"/>
+  
+  <circle cx="240" cy="140" r="10" fill="#F4D03F"/>
+  <rect x="235" y="150" width="10" height="20" fill="#F4D03F"/>
+  
+  <circle cx="200" cy="160" r="10" fill="#F4D03F"/>
+  <rect x="195" y="170" width="10" height="20" fill="#F4D03F"/>
+  
+  <!-- Training cones -->
+  <polygon points="320,60 325,70 315,70" fill="#F39C12"/>
+  <polygon points="340,60 345,70 335,70" fill="#F39C12"/>
+  <polygon points="360,60 365,70 355,70" fill="#F39C12"/>
+  
+  <polygon points="320,140 325,150 315,150" fill="#F39C12"/>
+  <polygon points="340,140 345,150 335,150" fill="#F39C12"/>
+  <polygon points="360,140 365,150 355,150" fill="#F39C12"/>
+  
+  <!-- Calendar icon -->
+  <rect x="30" y="40" width="40" height="40" rx="5" fill="white" stroke="#F4D03F" stroke-width="2"/>
+  <line x1="30" y1="55" x2="70" y2="55" stroke="#F4D03F" stroke-width="2"/>
+  <line x1="40" y1="35" x2="40" y2="45" stroke="#F4D03F" stroke-width="2"/>
+  <line x1="60" y1="35" x2="60" y2="45" stroke="#F4D03F" stroke-width="2"/>
+  <text x="38" y="75" font-family="Arial" font-size="20" font-weight="bold" fill="#F4D03F">18</text>
+</svg>
