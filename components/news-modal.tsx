@@ -4,17 +4,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, X } from "lucide-react"
-
-interface NewsArticle {
-  id: number
-  title: string
-  date: string
-  excerpt: string
-  content: string
-  image: string
-  category: string
-  featured?: boolean
-}
+import type { NewsArticle } from "@/types"
 
 interface NewsModalProps {
   article: NewsArticle | null
