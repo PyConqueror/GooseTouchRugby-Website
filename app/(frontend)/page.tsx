@@ -1,11 +1,4 @@
-"use client"
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Mail, Phone, ChevronRight } from "lucide-react"
-import { NewsModal } from "@/components/news-modal"
 import { Navbar } from "@/components/navbar"
 import { Payload } from "payload"
 import { HeroSection } from "@/components/home/HeroSection"
@@ -17,23 +10,11 @@ import { GetInTouchSection } from "@/components/home/GetInTouchSection"
 import { Footer } from "@/components/Footer"
 import type { NewsArticle } from "@/types"
 
+
 export default function Home() {
-  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const openArticle = (article: NewsArticle) => {
-    setSelectedArticle(article)
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-    setSelectedArticle(null)
-  }
-
-  // Sample news data for the homepage
   const newsArticles: NewsArticle[] = [
-    {
+     {
       id: 1,
       title: "Pre-Season Training Starts Next Week",
       date: "April 18, 2025",
@@ -43,7 +24,7 @@ export default function Home() {
       image: "/news-1.svg",
       category: "Announcement",
     },
-    {
+     {
       id: 2,
       title: "New Team Kit Unveiled",
       date: "April 10, 2025",
@@ -75,13 +56,10 @@ export default function Home() {
         <AboutSection />
         <PlayerSection />
         <FixturesResultsSection />
-        <NewsSection newsArticles={newsArticles} openArticle={openArticle} />
+        <NewsSection newsArticles={newsArticles} />
         <GetInTouchSection />
       </main>
       <Footer />
-
-      {/* News Modal */}
-      <NewsModal article={selectedArticle} isOpen={isModalOpen} onClose={closeModal} />
     </div>
   )
 }
