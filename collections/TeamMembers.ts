@@ -39,13 +39,20 @@ export const TeamMembers: CollectionConfig = {
       name: 'experience',
       type: 'number',
       required: true,
+      admin: {
+        description: 'Years of experience',
+      },
     },
     {
-      name: 'image',
-      type: 'relationship',
-      relationTo: 'media',
-      required: true,
-    },
+        name: 'image',
+        type: 'upload',
+        label: 'Featured Image',
+        relationTo: 'media',
+        required: true,
+        admin: {
+            description: 'Profile picture',
+        },
+      },
     {
       name: 'order',
       type: 'number',
