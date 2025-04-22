@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, Trophy, Clock } from "lucide-react"
 // Replace the header section with the Navbar component
 import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/Footer"
 
 export default function FixturesPage() {
   const [activeTab, setActiveTab] = useState("upcoming")
@@ -307,27 +308,7 @@ export default function FixturesPage() {
           </div>
         </section>
       </main>
-
-      <footer className="w-full border-t-4 border-dashed border-yellow-400 py-6 md:py-0 bg-yellow-100">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <div className="flex items-center gap-3">
-            <Image src="/logo.svg" alt="Goose Touch Rugby Logo" width={40} height={40} className="h-10 w-auto" />
-            <p className="text-sm font-bold text-black">© 2025 Goose Touch Rugby. All rights reserved.</p>
-          </div>
-          <nav className="flex gap-4 sm:gap-6">
-            <Link href="#" className="text-sm font-medium text-black hover:underline underline-offset-4">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-sm font-medium text-black hover:underline underline-offset-4">
-              Terms of Service
-            </Link>
-            <Link href="#" className="text-sm font-medium text-black hover:underline underline-offset-4">
-              Cookie Policy
-            </Link>
-          </nav>
-        </div>
-      </footer>
-
+      <Footer />
       <style jsx global>{`
         @keyframes fadeIn {
           from {
