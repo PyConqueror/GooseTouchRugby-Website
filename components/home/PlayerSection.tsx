@@ -3,6 +3,19 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { TeamMembersCarousel } from "./TeamMembersCarousel"
+
+// Placeholder data - replace with your actual data fetching logic
+const sampleTeamMembers = [
+  { id: 1, name: "Goose 1", position: "Wing", image: "" },
+  { id: 2, name: "Goose 2", position: "Center", image: "" },
+  { id: 3, name: "Goose 3", position: "Link", image: "" },
+  { id: 4, name: "Goose 4", position: "Wing", image: "" },
+  { id: 5, name: "Goose 5", position: "Center", image: "" },
+  { id: 6, name: "Goose 6", position: "Link", image: "" },
+  { id: 7, name: "Goose 7", position: "Wing", image: "" },
+  { id: 8, name: "Goose 8", position: "Center", image: "" },
+]
 
 export function PlayerSection() {
   return (
@@ -14,7 +27,7 @@ export function PlayerSection() {
         <Image src="/cartoon-goose2.svg" alt="Cartoon Goose" width={150} height={150} />
       </div>
       <div className="container px-4 md:px-6 relative">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8 md:mb-12">
           <div className="inline-block rotate-[1deg] bg-yellow-300 px-6 py-3 rounded-xl border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
             <h2 className="text-3xl font-heading tracking-tighter sm:text-4xl md:text-5xl text-black">
               Meet Our Team
@@ -24,36 +37,7 @@ export function PlayerSection() {
             The dedicated players and coaches who make Goose Touch Rugby special.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center space-y-3 rounded-xl border-4 border-black bg-white p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1 hover:rotate-1"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-yellow-300 rounded-full transform scale-105 border-4 border-black"></div>
-                <Image
-                  src={`/placeholder.svg?height=200&width=200`}
-                  alt={`Team member ${i}`}
-                  width={100}
-                  height={100}
-                  className="relative rounded-full object-cover border-4 border-black"
-                />
-              </div>
-              <h3 className="text-xl font-heading">Player Name</h3>
-              <p className="text-sm bg-yellow-200 px-3 py-1 rounded-full border-2 border-black font-bold">
-                Position
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="flex justify-center mt-12">
-          <Link href="/team">
-            <Button className="rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1">
-              View All Team Members
-            </Button>
-          </Link>
-        </div>
+        <TeamMembersCarousel teamMembers={sampleTeamMembers} showViewAllButton={true} />
       </div>
     </section>
   )
