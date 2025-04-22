@@ -164,7 +164,7 @@ export function Navbar() {
             </div>
 
             <div className="absolute bottom-8 left-0 right-0 flex justify-center">
-              <Image src="/cartoon-goose1.svg" alt="Cartoon Goose" width={80} height={80} className="opacity-70" />
+              <Image src="/logour.png" alt="Cartoon Goose" width={80} height={80} className="opacity-70" />
             </div>
           </div>
         </div>

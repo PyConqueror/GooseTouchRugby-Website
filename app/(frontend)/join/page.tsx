@@ -296,13 +296,13 @@ export default function JoinPage() {
 
         <section className="w-full py-12 md:py-24 bg-yellow-50 relative">
           <div className="absolute top-10 left-10 w-20 h-20 md:w-32 md:h-32 animate-bounce">
-            <Image src="/cartoon-goose1.svg" alt="Cartoon Goose" width={150} height={150} />
+            <Image src="/bagoose.png" alt="Cartoon Goose" width={150} height={150} />
           </div>
           <div
             className="absolute bottom-10 right-10 w-20 h-20 md:w-32 md:h-32 animate-bounce"
             style={{ animationDelay: "0.5s" }}
           >
-            <Image src="/cartoon-goose2.svg" alt="Cartoon Goose" width={150} height={150} />
+            <Image src="/membershipcard.png" alt="Cartoon Goose" width={150} height={150} />
           </div>
           <div className="container px-4 md:px-6 relative">
             <div className="flex flex-col items-center justify-center space-y-8 text-center">

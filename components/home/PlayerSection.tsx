@@ -21,10 +21,10 @@ export function PlayerSection() {
   return (
     <section id="team" className="w-full py-12 md:py-24 lg:py-32 bg-yellow-50 relative">
       <div className="absolute top-10 left-10 w-20 h-20 md:w-32 md:h-32">
-        <Image src="/cartoon-goose1.svg" alt="Cartoon Goose" width={150} height={150} />
+        <Image src="/membershipcard.png" alt="Cartoon Goose" width={150} height={150} />
       </div>
       <div className="absolute bottom-10 right-10 w-20 h-20 md:w-32 md:h-32">
-        <Image src="/cartoon-goose2.svg" alt="Cartoon Goose" width={150} height={150} />
+        <Image src="/logoooo.png" alt="Cartoon Goose" width={150} height={150} />
       </div>
       <div className="container px-4 md:px-6 relative">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8 md:mb-12">
