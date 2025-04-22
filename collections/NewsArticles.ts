@@ -28,7 +28,7 @@ export const NewsArticles: CollectionConfig = {
       admin: {
         date: {
           pickerAppearance: 'dayOnly', // Or 'dayAndTime' if needed
-          displayFormat: 'yyyy-MM-dd', // Adjust format as needed
+          displayFormat: 'dd-MM-YYYY', // Adjust format as needed
         },
         description: 'The publication date of the article.',
       },
