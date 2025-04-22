@@ -1,36 +1,13 @@
-"use client"
-
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Calendar, Search, ChevronLeft, ChevronRight } from "lucide-react"
-import { NewsModal } from "@/components/news-modal"
-import { Footer } from "@/components/Footer"
-import type { NewsArticle } from "@/types"
-
-// Replace the header section with the Navbar component
 import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/Footer"
+import { NewsDisplay } from "@/components/news/NewsDisplay"
+import { NewsletterSection } from "@/components/news/NewsletterSection"
+import type { NewsArticle } from "@/types" // Import type
 
-export default function NewsPage() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 6
-
-  const openArticle = (article: NewsArticle) => {
-    setSelectedArticle(article)
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-    setSelectedArticle(null)
-  }
-
-  // Sample news data
-  const newsArticles = [
+// Fetch or define news data (Server Component context)
+async function getNewsArticles(): Promise<NewsArticle[]> {
+  // Replace with actual data fetching logic
+  return [
     {
       id: 1,
       title: "Pre-Season Training Starts Next Week",
@@ -140,245 +117,23 @@ export default function NewsPage() {
       featured: false,
     },
   ]
+}
 
-  const filteredNews = newsArticles.filter((article) => {
-    // Filter by search query
-    if (
-      searchQuery &&
-      !article.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      !article.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-      return false
+export default async function NewsPage() {
+  const initialArticles = await getNewsArticles()
 
-    return true
-  })
+  // Remove client-side state and logic
 
   return (
     <div className="flex min-h-screen flex-col bg-yellow-50 font-comic">
       <Navbar />
-
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 bg-yellow-100 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48 -mt-8 -mr-8 md:-mt-12 md:-mr-12">
-            <Image src="/cartoon-sun.svg" alt="Cartoon Sun" width={200} height={200} />
-          </div>
-          <div className="container px-4 md:px-6 relative">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="inline-block rotate-[-2deg] bg-white px-6 py-3 rounded-xl border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-                <h1 className="text-3xl font-heading tracking-tighter sm:text-4xl md:text-5xl text-black">
-                  Latest News
-                </h1>
-              </div>
-              <p className="max-w-[900px] text-black md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed font-medium">
-                Stay updated with all the latest happenings from Goose Touch Rugby.
-              </p>
-
-              <div className="flex justify-center mt-6 max-w-3xl mx-auto">
-                <div className="bg-white p-4 rounded-xl border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] w-full">
-                  <div className="relative flex items-center w-full">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500" />
-                    <input
-                      type="text"
-                      placeholder="Search news..."
-                      className="pl-10 pr-4 py-2 w-full rounded-full border-2 border-black bg-yellow-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" fill="white">
-              <path d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,100L1380,100C1320,100,1200,100,1080,100C960,100,840,100,720,100C600,100,480,100,360,100C240,100,120,100,60,100L0,100Z"></path>
-            </svg>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-24 bg-white">
-          <div className="container px-4 md:px-6">
-            {/* All Articles */}
-            <div>
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-heading">All News</h2>
-                <div className="h-1 flex-1 mx-4 bg-yellow-300 rounded-full"></div>
-                {filteredNews.length > 0 && (
-                  <div className="bg-yellow-200 px-3 py-1 rounded-full border-2 border-black font-bold">
-                    {filteredNews.length} {filteredNews.length === 1 ? "Article" : "Articles"}
-                  </div>
-                )}
-              </div>
-
-              {filteredNews.length > 0 ? (
-                <>
-                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    {filteredNews
-                      .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                      .map((article, index) => (
-                        <div
-                          key={article.id}
-                          className="group relative flex flex-col space-y-4 rounded-xl border-4 border-black bg-white p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-all hover:-translate-y-2 hover:rotate-1 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
-                          style={{
-                            animationDelay: `${index * 0.1}s`,
-                            animation: "fadeIn 0.5s ease-out forwards",
-                            opacity: 0,
-                          }}
-                        >
-                          <div className="absolute right-4 top-4 z-10 rounded-full bg-yellow-300 px-3 py-1 text-xs font-bold border-2 border-black">
-                            {article.category}
-                          </div>
-                          <div className="relative h-40 w-full overflow-hidden rounded-lg border-4 border-black">
-                            <Image
-                              src={article.image || "/placeholder.svg"}
-                              alt={article.title}
-                              fill
-                              className="object-cover transition-transform group-hover:scale-105"
-                            />
-                          </div>
-                          <div className="flex-1 space-y-2">
-                            <div className="flex items-center gap-2">
-                              <Calendar className="h-4 w-4 text-orange-500" />
-                              <div className="inline-block bg-yellow-200 px-3 py-1 text-sm font-bold rounded-full border-2 border-black">
-                                {article.date}
-                              </div>
-                            </div>
-                            <h3 className="text-xl font-heading">{article.title}</h3>
-                            <p className="text-black line-clamp-3">{article.excerpt}</p>
-                          </div>
-                          <Button
-                            variant="outline"
-                            className="w-full rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
-                            onClick={() => openArticle(article)}
-                          >
-                            Read More
-                          </Button>
-                        </div>
-                      ))}
-                  </div>
-
-                  {/* Pagination */}
-                  {filteredNews.length > itemsPerPage && (
-                    <div className="flex justify-center items-center gap-4 mt-12">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
-                        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                        disabled={currentPage === 1}
-                      >
-                        <ChevronLeft className="h-5 w-5" />
-                        <span className="sr-only">Previous Page</span>
-                      </Button>
-
-                      <div className="bg-yellow-200 px-4 py-2 rounded-full border-2 border-black font-bold">
-                        Page {currentPage} of {Math.ceil(filteredNews.length / itemsPerPage)}
-                      </div>
-
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
-                        onClick={() =>
-                          setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(filteredNews.length / itemsPerPage)))
-                        }
-                        disabled={currentPage === Math.ceil(filteredNews.length / itemsPerPage)}
-                      >
-                        <ChevronRight className="h-5 w-5" />
-                        <span className="sr-only">Next Page</span>
-                      </Button>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="flex flex-col items-center justify-center py-12 space-y-4">
-                  <div className="relative w-32 h-32">
-                    <Image
-                      src="/prttt.png"
-                      alt="Sad Goose"
-                      width={150}
-                      height={150}
-                      className="transform -rotate-12"
-                    />
-                  </div>
-                  <h3 className="text-xl font-heading">No articles found</h3>
-                  <p className="text-black text-center max-w-md">
-                    We couldn't find any articles matching your search criteria. Try adjusting your search query.
-                  </p>
-                  <Button
-                    onClick={() => {
-                      setSearchQuery("")
-                      setCurrentPage(1)
-                    }}
-                    className="rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
-                  >
-                    Reset Search
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-24 bg-yellow-50 relative">
-          <div className="absolute top-10 left-10 w-20 h-20 md:w-32 md:h-32 animate-bounce">
-            <Image src="/prttt.png" alt="Cartoon Goose" width={150} height={150} />
-          </div>
-          <div
-            className="absolute bottom-10 right-10 w-20 h-20 md:w-32 md:h-32 animate-bounce"
-            style={{ animationDelay: "0.5s" }}
-          >
-            <Image src="/arng.png" alt="Cartoon Goose" width={150} height={150} />
-          </div>
-          <div className="container px-4 md:px-6 relative">
-            <div className="flex flex-col items-center justify-center space-y-8 text-center">
-              <div className="inline-block rotate-[1deg] bg-yellow-300 px-6 py-3 rounded-xl border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-                <h2 className="text-3xl font-heading tracking-tighter sm:text-4xl text-black">
-                  Subscribe to Our Newsletter
-                </h2>
-              </div>
-              <p className="max-w-[600px] text-black md:text-xl/relaxed font-medium">
-                Get the latest news, match updates, and team announcements delivered straight to your inbox!
-              </p>
-              <div className="relative max-w-md w-full">
-                <div className="absolute -top-6 -right-6 transform rotate-12">
-                  <div className="bg-white px-4 py-2 rounded-xl border-2 border-black shadow-md">
-                    <p className="text-sm font-bold">Join our WhatsApp group!</p>
-                  </div>
-                  <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-3 h-3 bg-white border-r-2 border-b-2 border-black"></div>
-                </div>
-                <div className="bg-white p-6 rounded-xl border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-                  <div className="flex justify-center">
-                    <a href="https://whatsapp.com/channel/example-link" target="_blank" rel="noopener noreferrer">
-                      <Button className="rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1 px-8 py-3">
-                        Subscribe via WhatsApp
-                      </Button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Use the client wrapper component */}
+        <NewsDisplay initialArticles={initialArticles} />
+        <NewsletterSection />
       </main>
-
       <Footer />
-
-      {/* News Modal */}
-      <NewsModal article={selectedArticle} isOpen={isModalOpen} onClose={closeModal} />
-
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+      {/* Remove global style for fadeIn if handled elsewhere */}
     </div>
   )
 }
