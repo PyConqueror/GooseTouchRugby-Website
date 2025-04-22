@@ -1,18 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/Footer"
+import { Search, ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function TeamPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen)
-  }
+  const [searchQuery, setSearchQuery] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState(8)
+  const [totalPages, setTotalPages] = useState(1)
 
   // Sample team data
   const teamMembers = [
@@ -123,6 +123,64 @@ export default function TeamPage() {
     },
   ]
 
+  // Update items per page based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1280) {
+        // xl
+        setItemsPerPage(12)
+      } else if (window.innerWidth >= 1024) {
+        // lg
+        setItemsPerPage(9)
+      } else if (window.innerWidth >= 768) {
+        // md
+        setItemsPerPage(6)
+      } else {
+        // sm and below
+        setItemsPerPage(4)
+      }
+    }
+
+    // Set initial value
+    handleResize()
+
+    // Add event listener
+    window.addEventListener("resize", handleResize)
+
+    // Clean up
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  // Filter team members based on search query
+  const filteredTeamMembers = teamMembers.filter(
+    (member) =>
+      member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.position.toLowerCase().includes(searchQuery.toLowerCase()),
+  )
+
+  // Calculate total pages
+  useEffect(() => {
+    setTotalPages(Math.ceil(filteredTeamMembers.length / itemsPerPage))
+    // Reset to first page if current page would be out of bounds
+    if (currentPage > Math.ceil(filteredTeamMembers.length / itemsPerPage)) {
+      setCurrentPage(1)
+    }
+  }, [filteredTeamMembers, itemsPerPage, currentPage])
+
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = filteredTeamMembers.slice(indexOfFirstItem, indexOfLastItem)
+
+  // Change page
+  const goToNextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+  }
+
+  const goToPrevPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1))
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-yellow-50 font-comic">
       <Navbar />
@@ -141,6 +199,22 @@ export default function TeamPage() {
               <p className="max-w-[900px] text-black md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed font-medium">
                 The dedicated players and coaches who make Goose Touch Rugby special.
               </p>
+
+              {/* Search Bar */}
+              <div className="w-full max-w-md mt-4">
+                <div className="bg-white p-4 rounded-xl border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
+                  <div className="relative flex items-center w-full">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500" />
+                    <input
+                      type="text"
+                      placeholder="Search by name or position..."
+                      className="pl-10 pr-4 py-2 w-full rounded-full border-2 border-black bg-yellow-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-0">
@@ -152,37 +226,112 @@ export default function TeamPage() {
 
         <section className="w-full py-12 md:py-24 bg-white">
           <div className="container px-4 md:px-6">
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {teamMembers.map((member, index) => (
-                <div
-                  key={member.id}
-                  className="group relative flex flex-col items-center space-y-4 rounded-xl border-4 border-black bg-white p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-all hover:-translate-y-2 hover:rotate-1 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                    animation: "fadeIn 0.5s ease-out forwards",
-                    opacity: 0,
-                  }}
-                >
-                  <div className="absolute -top-3 -right-3 bg-yellow-300 rounded-full px-3 py-1 text-xs font-bold border-2 border-black transform rotate-12">
-                    {member.experience}
-                  </div>
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-yellow-300 rounded-full transform scale-105 border-4 border-black"></div>
-                    <Image
-                      src={member.image || "/placeholder.svg"}
-                      alt={member.name}
-                      width={150}
-                      height={150}
-                      className="relative rounded-full object-cover border-4 border-black h-36 w-36"
-                    />
-                  </div>
-                  <h3 className="text-xl font-heading text-center">{member.name}</h3>
-                  <p className="text-sm bg-yellow-200 px-3 py-1 rounded-full border-2 border-black font-bold">
-                    {member.position}
-                  </p>
+            {filteredTeamMembers.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {currentItems.map((member, index) => (
+                    <div
+                      key={member.id}
+                      className="group relative flex flex-col items-center space-y-4 rounded-xl border-4 border-black bg-white p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-all hover:-translate-y-2 hover:rotate-1 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
+                      style={{
+                        animationName: "fadeIn",
+                        animationDuration: "0.5s",
+                        animationTimingFunction: "ease-out",
+                        animationFillMode: "forwards",
+                        animationDelay: `${index * 0.1}s`,
+                        opacity: 0,
+                      }}
+                    >
+                      <div className="absolute -top-3 -right-3 bg-yellow-300 rounded-full px-3 py-1 text-xs font-bold border-2 border-black transform rotate-12">
+                        {member.experience}
+                      </div>
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-yellow-300 rounded-full transform scale-105 border-4 border-black"></div>
+                        <Image
+                          src={member.image || "/placeholder.svg"}
+                          alt={member.name}
+                          width={150}
+                          height={150}
+                          className="relative rounded-full object-cover border-4 border-black h-36 w-36"
+                        />
+                      </div>
+                      <h3 className="text-xl font-heading text-center">{member.name}</h3>
+                      <p className="text-sm bg-yellow-200 px-3 py-1 rounded-full border-2 border-black font-bold">
+                        {member.position}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                  <div className="mt-12 flex flex-col items-center space-y-4">
+                    <div className="flex items-center gap-4">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
+                        onClick={goToPrevPage}
+                        disabled={currentPage === 1}
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                        <span className="sr-only">Previous Page</span>
+                      </Button>
+
+                      <div className="bg-yellow-200 px-4 py-2 rounded-full border-2 border-black font-bold">
+                        Page {currentPage} of {totalPages}
+                      </div>
+
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
+                        onClick={goToNextPage}
+                        disabled={currentPage === totalPages}
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                        <span className="sr-only">Next Page</span>
+                      </Button>
+                    </div>
+
+                    <div className="flex gap-2">
+                      {Array.from({ length: totalPages }).map((_, index) => (
+                        <button
+                          key={index}
+                          className={`h-3 w-3 rounded-full border-2 border-black ${
+                            currentPage === index + 1 ? "bg-yellow-400" : "bg-white"
+                          }`}
+                          onClick={() => setCurrentPage(index + 1)}
+                          aria-label={`Go to page ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-12 space-y-4">
+                <div className="relative w-32 h-32">
+                  <Image
+                    src="/cartoon-goose1.svg"
+                    alt="Sad Goose"
+                    width={150}
+                    height={150}
+                    className="transform -rotate-12"
+                  />
+                </div>
+                <h3 className="text-xl font-heading">No team members found</h3>
+                <p className="text-black text-center max-w-md">
+                  We couldn't find any team members matching your search criteria. Try adjusting your search query.
+                </p>
+                <Button
+                  onClick={() => setSearchQuery("")}
+                  className="rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
+                >
+                  Reset Search
+                </Button>
+              </div>
+            )}
           </div>
         </section>
 
@@ -212,9 +361,11 @@ export default function TeamPage() {
                   </div>
                   <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-3 h-3 bg-white border-r-2 border-b-2 border-black"></div>
                 </div>
-                <Button className="rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1 px-8 py-6 text-xl">
-                  Sign Up Today!
-                </Button>
+                <Link href="/join">
+                  <Button className="rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1 px-8 py-6 text-xl">
+                    Sign Up Today!
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
