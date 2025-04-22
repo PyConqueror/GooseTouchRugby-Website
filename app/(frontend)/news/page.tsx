@@ -6,24 +6,27 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Calendar, Search, ChevronLeft, ChevronRight } from "lucide-react"
 import { NewsModal } from "@/components/news-modal"
+import { Footer } from "@/components/Footer"
+import type { NewsArticle } from "@/types"
 
 // Replace the header section with the Navbar component
 import { Navbar } from "@/components/navbar"
 
 export default function NewsPage() {
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedArticle, setSelectedArticle] = useState(null)
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6
 
-  const openArticle = (article) => {
+  const openArticle = (article: NewsArticle) => {
     setSelectedArticle(article)
     setIsModalOpen(true)
   }
 
   const closeModal = () => {
     setIsModalOpen(false)
+    setSelectedArticle(null)
   }
 
   // Sample news data
@@ -359,25 +362,7 @@ export default function NewsPage() {
         </section>
       </main>
 
-      <footer className="w-full border-t-4 border-dashed border-yellow-400 py-6 md:py-0 bg-yellow-100">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <div className="flex items-center gap-3">
-            <Image src="/logo.svg" alt="Goose Touch Rugby Logo" width={40} height={40} className="h-10 w-auto" />
-            <p className="text-sm font-bold text-black">© 2025 Goose Touch Rugby. All rights reserved.</p>
-          </div>
-          <nav className="flex gap-4 sm:gap-6">
-            <Link href="#" className="text-sm font-medium text-black hover:underline underline-offset-4">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-sm font-medium text-black hover:underline underline-offset-4">
-              Terms of Service
-            </Link>
-            <Link href="#" className="text-sm font-medium text-black hover:underline underline-offset-4">
-              Cookie Policy
-            </Link>
-          </nav>
-        </div>
-      </footer>
+      <Footer />
 
       {/* News Modal */}
       <NewsModal article={selectedArticle} isOpen={isModalOpen} onClose={closeModal} />
