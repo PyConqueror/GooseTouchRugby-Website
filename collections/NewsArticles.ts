@@ -28,14 +28,14 @@ export const NewsArticles: CollectionConfig = {
       admin: {
         date: {
           pickerAppearance: 'dayOnly', // Or 'dayAndTime' if needed
-          displayFormat: 'dd-MM-YYYY', // Adjust format as needed
+          displayFormat: 'dd-MM-yyyy', // Adjust format as needed
         },
         description: 'The publication date of the article.',
       },
     },
     {
       name: 'content',
-      type: 'richText',
+      type: 'textarea',
       label: 'Content',
       required: true,
       admin: {
@@ -66,6 +66,7 @@ export const NewsArticles: CollectionConfig = {
         { label: 'Event', value: 'event' },
         { label: 'Match', value: 'match' },
         { label: 'Common', value: 'common' },
+        { label: 'Training', value: 'training' },
       ],
       admin: {
         description: 'The category of the news article.',
