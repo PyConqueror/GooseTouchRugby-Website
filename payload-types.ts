@@ -19,7 +19,9 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
+  globals: {
+    'news-global': NewsGlobal;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -121,7 +123,37 @@ export interface Auth {
   [k: string]: unknown;
 }
 
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface NewsGlobal {
+  id: string;
+  featuredNews?: (string | NewsArticle)[] | null;
+  globalType?: 'news-global';
+}
+
+export interface NewsArticle {
+  id: string;
+  title: string;
+  date: string;
+  content: string;
+  image: string | Media; // Assuming a 'Media' type is defined in payload-types.ts
+  category:
+    | 'announcement'
+    | 'team-news'
+    | 'player-spotlight'
+    | 'match-report'
+    | 'sponsorship'
+    | 'event'
+    | 'match'
+    | 'common'
+    | 'training';
+  updatedAt: string;
+  createdAt: string;
+}
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
 }
+
