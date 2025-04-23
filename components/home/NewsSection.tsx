@@ -4,22 +4,19 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import type { NewsArticle } from "@/types"
+import { NewsArticle as NewsArticleType, NewsGlobal as NewsGlobalType } from "@/payload-types"
 import { NewsModal } from "@/components/news-modal"
 
-// Update props interface: remove openArticle
 interface NewsSectionProps {
-  newsArticles: NewsArticle[];
-  // openArticle: (article: NewsArticle) => void; // Removed prop
+  data: NewsGlobalType;
 }
 
-export function NewsSection({ newsArticles }: NewsSectionProps) {
-  // Moved state management here
-  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null)
+export function NewsSection({ data }: NewsSectionProps) {
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticleType | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const newsArticles = (data.featuredNews as NewsArticleType[]).slice(0, 3) //temp
 
-  // Moved functions here
-  const openArticle = (article: NewsArticle) => {
+  const openArticle = (article: NewsArticleType) => {
     setSelectedArticle(article)
     setIsModalOpen(true)
   }
@@ -51,11 +48,11 @@ export function NewsSection({ newsArticles }: NewsSectionProps) {
                 className="group relative flex flex-col space-y-4 rounded-xl border-4 border-black bg-white p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-2 hover:rotate-1"
               >
                 <div className="absolute right-4 top-4 z-10 rounded-full bg-yellow-300 px-3 py-1 text-xs font-bold border-2 border-black">
-                  {news.category}
+                  {news.category.toLowerCase()}
                 </div>
                 <div className="relative h-48 w-full overflow-hidden rounded-lg border-4 border-black">
                   <Image
-                    src={news.image || "/placeholder.svg"}
+                    src={typeof news.image === 'object' && news.image?.url ? news.image.url : "/placeholder.svg"}
                     alt={news.title}
                     fill
                     className="object-cover transition-transform group-hover:scale-105"
@@ -63,15 +60,22 @@ export function NewsSection({ newsArticles }: NewsSectionProps) {
                 </div>
                 <div className="flex-1 space-y-2">
                   <div className="inline-block bg-yellow-200 px-3 py-1 text-sm font-bold rounded-full border-2 border-black">
-                    {news.date}
+                    {new Date(news.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
                   </div>
                   <h3 className="text-xl font-heading">{news.title}</h3>
-                  <p className="text-black">{news.excerpt}</p>
+                  <p className="text-black whitespace-pre-wrap">
+                    {news.content.split(' ').slice(0, 40).join(' ')}
+                    {news.content.split(' ').length > 30 ? '...' : ''}
+                  </p>
                 </div>
                 <Button
                   variant="outline"
                   className="w-full rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
-                  onClick={() => openArticle(news)} // Use local openArticle function
+                  onClick={() => openArticle(news)} 
                 >
                   Read More
                 </Button>
@@ -94,7 +98,6 @@ export function NewsSection({ newsArticles }: NewsSectionProps) {
         </div>
       </section>
 
-      {/* Moved NewsModal rendering here */}
       <NewsModal article={selectedArticle} isOpen={isModalOpen} onClose={closeModal} />
     </>
   )

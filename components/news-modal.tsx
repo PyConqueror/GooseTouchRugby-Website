@@ -4,10 +4,10 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, X } from "lucide-react"
-import type { NewsArticle } from "@/types"
+import type { NewsArticle as NewsArticleType } from "@/payload-types"
 
 interface NewsModalProps {
-  article: NewsArticle | null
+  article: NewsArticleType | null
   isOpen: boolean
   onClose: () => void
 }
@@ -38,7 +38,7 @@ export function NewsModal({ article, isOpen, onClose }: NewsModalProps) {
       <div className="fixed inset-0 bg-black/50" onClick={onClose} />
 
       <div
-        className="relative max-h-[90vh] w-full max-w-4xl overflow-auto rounded-xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_rgba(0,0,0,1)] transform rotate-1"
+        className="relative max-h-[90vh] w-full max-w-3xl overflow-auto rounded-xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_rgba(0,0,0,1)] transform rotate-1 [&::-webkit-scrollbar]:hidden scrollbar-width-none"
         onClick={(e) => e.stopPropagation()}
       >
         <Button
@@ -58,29 +58,42 @@ export function NewsModal({ article, isOpen, onClose }: NewsModalProps) {
             </div>
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4 text-orange-500" />
-              <div className="text-sm font-bold">{article.date}</div>
+              <div className="text-sm font-bold">
+                {new Date(article.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </div>
             </div>
           </div>
 
           <h2 className="text-3xl font-heading">{article.title}</h2>
 
-          <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-lg border-4 border-black">
-            <Image
-              src={article.image || "/placeholder.svg?height=400&width=800"}
-              alt={article.title}
-              fill
-              className="object-cover"
-            />
+          <div className="w-auto mx-auto">
+            <div className="relative w-full overflow-hidden rounded-lg border-4 border-black">
+              {typeof article.image === 'object' && article.image?.url && article.image.width && article.image.height ? (
+                <Image
+                  src={article.image.url}
+                  alt={article.title}
+                  width={article.image.width}
+                  height={article.image.height}
+                  layout="responsive"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="rounded-sm"
+                />
+              ) : (
+                <div className="aspect-video w-full bg-gray-200 flex items-center justify-center rounded-lg">
+                  <span className="text-gray-500">Image unavailable</span>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="space-y-4">
-            <p className="font-medium">{article.excerpt}</p>
 
-            <div className="prose max-w-none">
-              {/* Split content into paragraphs */}
-              {article.content.split("\n\n").map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+            <div className="prose max-w-none text-clip">
+                <p key={article.id} className="whitespace-pre-wrap">{article.content}</p>
             </div>
           </div>
 
