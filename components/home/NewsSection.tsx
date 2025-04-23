@@ -48,7 +48,7 @@ export function NewsSection({ data }: NewsSectionProps) {
                 className="group relative flex flex-col space-y-4 rounded-xl border-4 border-black bg-white p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-2 hover:rotate-1"
               >
                 <div className="absolute right-4 top-4 z-10 rounded-full bg-yellow-300 px-3 py-1 text-xs font-bold border-2 border-black">
-                  {news.category.toLowerCase()}
+                  {news.category}
                 </div>
                 <div className="relative h-48 w-full overflow-hidden rounded-lg border-4 border-black">
                   <Image
