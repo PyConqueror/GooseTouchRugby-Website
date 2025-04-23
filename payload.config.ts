@@ -10,6 +10,8 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { NewsArticles } from './collections/NewsArticles'
 import { TeamMembers } from './collections/TeamMembers'
+import { Fixtures } from './collections/Fixtures'
+import { NewsGlobal } from './globals/NewsGlobal'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 const filename = fileURLToPath(import.meta.url)
@@ -22,7 +24,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, NewsArticles, TeamMembers],
+  collections: [Users, Media, NewsArticles, TeamMembers, Fixtures],
+  globals: [NewsGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   // sharp,
