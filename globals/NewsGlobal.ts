@@ -1,5 +1,6 @@
 import { GlobalConfig } from 'payload';
-
+import { revalidateTag } from 'next/cache';
+import type { NewsArticle } from '../payload-types';
 export const NewsGlobal: GlobalConfig = {
   slug: 'news-global',
   access: {
@@ -17,4 +18,21 @@ export const NewsGlobal: GlobalConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [
+      ({ doc, req: { payload, context } }) => {
+        if (!context.disableRevalidate) {
+          payload.logger.info(`Revalidating`)
+          revalidateTag('news-global')
+        }
+        return doc
+      },
+    ],  
+    afterRead: [
+      ({ doc, req: { payload, context } }) => {
+        doc.featuredNews.sort((a: NewsArticle, b: NewsArticle) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        return doc
+      },
+    ],
+  },
 }; 
