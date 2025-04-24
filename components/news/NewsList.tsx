@@ -3,16 +3,15 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react"
-import type { NewsArticle } from "@/types" // Assuming types are defined here
-
+import type { NewsArticle as NewsArticleType } from "@/payload-types"
 interface NewsListProps {
-  articles: NewsArticle[]
+  articles: NewsArticleType[]
   currentPage: number
   totalPages: number
   goToPrevPage: () => void
   goToNextPage: () => void
   setCurrentPage: (page: number) => void
-  openArticle: (article: NewsArticle) => void
+  openArticle: (article: NewsArticleType) => void
   totalFilteredCount: number // Pass the total count for the header
 }
 
@@ -62,7 +61,7 @@ export function NewsList({
                     </div>
                     <div className="relative h-40 w-full overflow-hidden rounded-lg border-4 border-black">
                       <Image
-                        src={article.image || "/placeholder.svg"}
+                        src={typeof article.image === 'object' && article.image?.url ? article.image.url : "/placeholder.svg"}
                         alt={article.title}
                         fill
                         className="object-cover transition-transform group-hover:scale-105"
@@ -72,11 +71,14 @@ export function NewsList({
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-orange-500" />
                         <div className="inline-block bg-yellow-200 px-3 py-1 text-sm font-bold rounded-full border-2 border-black">
-                          {article.date}
-                        </div>
+                        {new Date(article.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}                        </div>
                       </div>
                       <h3 className="text-xl font-heading">{article.title}</h3>
-                      <p className="text-black line-clamp-3">{article.excerpt}</p>
+                      <p className="text-black line-clamp-3">{article.content}</p>
                     </div>
                     <Button
                       variant="outline"
