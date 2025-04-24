@@ -4,39 +4,54 @@ import { useState, useEffect } from "react"
 import { NewsHeader } from "./NewsHeader"
 import { NewsList } from "./NewsList"
 import { NewsModal } from "@/components/news-modal" // Assuming modal path
-import type { NewsArticle } from "@/types" // Assuming types path
+import type { NewsArticle as NewsArticleType, NewsGlobal as NewsGlobalType } from "@/payload-types"
 
 interface NewsDisplayProps {
-  initialArticles: NewsArticle[]
+  data: NewsGlobalType
 }
 
-export function NewsDisplay({ initialArticles }: NewsDisplayProps) {
+export function NewsDisplay({ data }: NewsDisplayProps) {
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null)
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticleType | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const itemsPerPage = 6 // Or make this dynamic based on screen size if needed
 
-  // Filtering logic
-  const filteredNews = initialArticles.filter((article) => {
-    if (
-      searchQuery &&
-      !article.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      !article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      !(article.content && article.content.toLowerCase().includes(searchQuery.toLowerCase())) // Also search content
-    )
-      return false
-    return true
-  })
+  // Helper type guard to check if an item is a NewsArticleType
+  const isNewsArticle = (item: any): item is NewsArticleType => {
+    return typeof item === 'object' && item !== null && 'id' in item && 'title' in item;
+  };
+
+  const filteredNews = data.featuredNews?.filter(
+    (article): article is NewsArticleType => {
+      if (!isNewsArticle(article)) {
+        return false // Skip if it's not a valid NewsArticle object
+      }
+      // Now TypeScript knows 'article' is NewsArticleType
+      if (
+        searchQuery &&
+        !article.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        // Ensure content exists and is searchable (might be RichText, adjust as needed)
+        article.content && typeof article.content === 'string' && // Basic check, adjust if content is complex
+        !article.content.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+        return false
+      return true
+    }
+  );
 
   // Calculate total pages whenever filtered news change
   useEffect(() => {
-    const newTotalPages = Math.ceil(filteredNews.length / itemsPerPage)
+    const count = filteredNews?.length || 0;
+    const newTotalPages = Math.ceil(count / itemsPerPage)
     setTotalPages(newTotalPages > 0 ? newTotalPages : 1)
     // Reset to first page if current page is out of bounds
     if (currentPage > newTotalPages && newTotalPages > 0) {
       setCurrentPage(1)
+    } else if (count === 0) {
+      // Handle case where filter results in zero items
+      setCurrentPage(1);
     }
   }, [filteredNews, itemsPerPage, currentPage])
 
@@ -48,7 +63,8 @@ export function NewsDisplay({ initialArticles }: NewsDisplayProps) {
   // Get current items for the current page
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentArticles = filteredNews.slice(indexOfFirstItem, indexOfLastItem)
+  // Ensure currentArticles is always an array, even if filteredNews is undefined
+  const currentArticles = filteredNews?.slice(indexOfFirstItem, indexOfLastItem) || [];
 
   // Pagination handlers
   const goToNextPage = () => {
@@ -65,7 +81,7 @@ export function NewsDisplay({ initialArticles }: NewsDisplayProps) {
   }
 
   // Modal handlers
-  const openArticle = (article: NewsArticle) => {
+  const openArticle = (article: NewsArticleType) => {
     setSelectedArticle(article)
     setIsModalOpen(true)
   }
@@ -87,7 +103,7 @@ export function NewsDisplay({ initialArticles }: NewsDisplayProps) {
         goToNextPage={goToNextPage}
         setCurrentPage={handleSetCurrentPage}
         openArticle={openArticle}
-        totalFilteredCount={filteredNews.length}
+        totalFilteredCount={filteredNews?.length || 0}
       />
       {/* Render modal conditionally based on selectedArticle to allow fade-out */}
       {isModalOpen && (
