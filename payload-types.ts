@@ -17,6 +17,7 @@ export interface Config {
     'team-members': TeamMember;
     fixtures: Fixture;
     'profile-picture': ProfilePicture;
+    'opponent-picture': OpponentPicture;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -188,6 +189,7 @@ export interface Fixture {
   time: string;
   modifedTitle?: string | null;
   opponent: string;
+  opponentPicture?: string | OpponentPicture | null;
   location: string;
   status: 'upcoming' | 'won' | 'lost';
   result?: {
@@ -213,6 +215,30 @@ export interface ProfilePicture {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+
+export interface OpponentPicture {
+  id: string;
+  'Opponent Name': string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 
 declare module 'payload' {

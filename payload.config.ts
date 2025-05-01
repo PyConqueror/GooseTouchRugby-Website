@@ -13,6 +13,7 @@ import { TeamMembers } from './collections/TeamMembers.ts'
 import { Fixtures } from './collections/Fixtures.ts'
 import { NewsGlobal } from './globals/NewsGlobal.ts'
 import { ProfilePicture } from './collections/ProfilePicture.ts'
+import { OpponentPicture } from './collections/OpponentPicture.ts'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 const filename = fileURLToPath(import.meta.url)
@@ -25,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, NewsArticles, TeamMembers, Fixtures, ProfilePicture],
+  collections: [Users, Media, NewsArticles, TeamMembers, Fixtures, ProfilePicture, OpponentPicture],
   globals: [NewsGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

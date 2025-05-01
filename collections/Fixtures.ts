@@ -54,6 +54,17 @@ export const Fixtures: CollectionConfig = {
       },
     },
     {
+      name: 'opponentPicture',
+      label: 'Opponent Picture',
+      type: 'relationship',
+      relationTo: 'opponent-picture',
+      hasMany: false,
+      required: false,
+      admin: {
+        description: 'Select the picture associated with the opponent team.',
+      },
+    },
+    {
       name: 'location',
       label: 'Match Location', 
       type: 'text',
