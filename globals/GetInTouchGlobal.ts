@@ -1,5 +1,5 @@
 import { GlobalConfig } from 'payload';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 
 export const GetIntouchGlobal: GlobalConfig = {
   slug: 'get-in-touch',
@@ -47,8 +47,9 @@ export const GetIntouchGlobal: GlobalConfig = {
     afterChange: [
       ({ doc, req: { payload, context } }) => {
         if (!context.disableRevalidate) {
-          payload.logger.info(`Revalidating Get In Touch Global`);
-          revalidateTag('get-in-touch');
+          payload.logger.info(`Revalidating homepage and news`);
+          revalidatePath('/');
+          revalidatePath('/news');
         }
         return doc;
       },
