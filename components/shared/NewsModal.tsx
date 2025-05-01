@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, X } from "lucide-react"
 import type { NewsArticle as NewsArticleType } from "@/payload-types"
+import { formatDate } from "@/utils/dateUtils"
 
 interface NewsModalProps {
   article: NewsArticleType | null
@@ -59,11 +60,7 @@ export function NewsModal({ article, isOpen, onClose }: NewsModalProps) {
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4 text-orange-500" />
               <div className="text-sm font-bold">
-                {new Date(article.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
+                {formatDate(article.date)}
               </div>
             </div>
           </div>

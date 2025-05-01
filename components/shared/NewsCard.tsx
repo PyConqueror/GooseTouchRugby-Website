@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import type { NewsArticle as NewsArticleType } from "@/payload-types";
+import { formatDate } from "@/utils/dateUtils";
 
 interface NewsCardProps {
   news: NewsArticleType;
@@ -25,11 +26,7 @@ export function NewsCard({ news, openArticle }: NewsCardProps) {
       </div>
       <div className="flex-1 space-y-2">
         <div className="inline-block bg-yellow-200 px-3 py-1 text-sm font-bold rounded-full border-2 border-black">
-          {new Date(news.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
+          {formatDate(news.date)}
         </div>
         <h3 className="text-xl font-heading">{news.title}</h3>
         <p className="text-black whitespace-pre-wrap">

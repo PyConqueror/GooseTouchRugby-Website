@@ -4,6 +4,8 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react"
 import type { NewsArticle as NewsArticleType } from "@/payload-types"
+import { formatDate } from "@/utils/dateUtils"
+
 interface NewsListProps {
   articles: NewsArticleType[]
   currentPage: number
@@ -71,11 +73,8 @@ export function NewsList({
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-orange-500" />
                         <div className="inline-block bg-yellow-200 px-3 py-1 text-sm font-bold rounded-full border-2 border-black">
-                        {new Date(article.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}                        </div>
+                          {formatDate(article.date)}
+                        </div>
                       </div>
                       <h3 className="text-xl font-heading">{article.title}</h3>
                       <p className="text-black line-clamp-3 break-all">{article.content}</p>
