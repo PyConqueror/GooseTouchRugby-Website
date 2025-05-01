@@ -14,8 +14,10 @@ export default async function Home() {
 
   const payload = getPayload({ config })
 
-  const newsArticles = await (await payload).findGlobal({
-    slug: "news-global",
+  const newsArticles = await (await payload).find({
+    collection: "news-articles",
+    limit: 3,
+    depth: 1,
   })
 
   const teamMembers = await (await payload).find({
@@ -33,7 +35,7 @@ export default async function Home() {
         <AboutSection />
         <PlayerSection teamMembers={teamMembers.docs}/>
         <FixturesResultsSection />
-        <NewsSection data={newsArticles} />
+        <NewsSection data={newsArticles.docs} />
         <GetInTouchSection />
       </main>
       <Footer />

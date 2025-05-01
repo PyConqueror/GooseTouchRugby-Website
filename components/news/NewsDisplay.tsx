@@ -7,7 +7,7 @@ import { NewsModal } from "@/components/news-modal" // Assuming modal path
 import type { NewsArticle as NewsArticleType, NewsGlobal as NewsGlobalType } from "@/payload-types"
 
 interface NewsDisplayProps {
-  data: NewsGlobalType
+  data: NewsGlobalType[]
 }
 
 export function NewsDisplay({ data }: NewsDisplayProps) {
@@ -23,7 +23,7 @@ export function NewsDisplay({ data }: NewsDisplayProps) {
     return typeof item === 'object' && item !== null && 'id' in item && 'title' in item;
   };
 
-  const filteredNews = data.featuredNews?.filter(
+  const filteredNews = data.filter(
     (article): article is NewsArticleType => {
       if (!isNewsArticle(article)) {
         return false // Skip if it's not a valid NewsArticle object

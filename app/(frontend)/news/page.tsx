@@ -8,8 +8,10 @@ import config from "@/payload.config"
 
 export default async function NewsPage() {
   const payload = getPayload({ config })
-  const newsArticles = await (await payload).findGlobal({
-    slug: "news-global",
+  const newsArticles = await (await payload).find({
+    collection: "news-articles",
+    limit: 1000,
+    depth: 1,
   })
 
 
@@ -17,7 +19,7 @@ export default async function NewsPage() {
     <div className="flex min-h-screen flex-col bg-yellow-50 font-comic">
       <Navbar />
       <main className="flex-1">
-        <NewsDisplay data={newsArticles} />
+        <NewsDisplay data={newsArticles.docs} />
         <NewsletterSection />
       </main>
       <Footer />

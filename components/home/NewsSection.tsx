@@ -9,13 +9,13 @@ import { NewsModal } from "@/components/news-modal"
 import { NewsCard } from "@/components/shared/NewsCard"
 
 interface NewsSectionProps {
-  data: NewsGlobalType;
+  data: NewsGlobalType[];
 }
 
 export function NewsSection({ data }: NewsSectionProps) {
   const [selectedArticle, setSelectedArticle] = useState<NewsArticleType | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const newsArticles = (data.featuredNews as NewsArticleType[]).slice(0, 3) //temp
+  const newsArticles = (data as NewsArticleType[])
 
   const openArticle = (article: NewsArticleType) => {
     setSelectedArticle(article)
