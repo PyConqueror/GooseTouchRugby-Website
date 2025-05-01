@@ -1,6 +1,5 @@
 
 import { Navbar } from "@/components/navbar"
-import { Payload } from "payload"
 import { HeroSection } from "@/components/home/HeroSection"
 import { AboutSection } from "@/components/home/AboutSection"
 import { PlayerSection } from "@/components/home/PlayerSection"
@@ -8,7 +7,6 @@ import { FixturesResultsSection } from "@/components/home/FixturesResultsSection
 import { NewsSection } from "@/components/home/NewsSection"
 import { GetInTouchSection } from "@/components/home/GetInTouchSection"
 import { Footer } from "@/components/Footer"
-import type { NewsArticle } from "@/types"
 import { getPayload } from "payload";
 import config from "@/payload.config"
 

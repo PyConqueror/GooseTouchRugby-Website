@@ -3,24 +3,16 @@
 import { useState, useEffect } from "react"
 import { TeamHeader } from "./TeamHeader"
 import { TeamMembersGrid } from "./TeamMembersGrid"
-
-// Define TeamMember type here or import from a shared types file
-export interface TeamMember {
-  id: number
-  name: string
-  position: string
-  experience: string
-  image: string
-}
+import type { TeamMember as TeamMemberType } from "@/payload-types"
 
 interface TeamDisplayProps {
-  initialTeamMembers: TeamMember[]
+  initialTeamMembers: TeamMemberType[]
 }
 
 export function TeamDisplay({ initialTeamMembers }: TeamDisplayProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState(8) // Default value
+  const [itemsPerPage, setItemsPerPage] = useState(8) // Default vTeamMemberTypealue
   const [totalPages, setTotalPages] = useState(1)
 
   // Update items per page based on screen size

@@ -3,18 +3,11 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import type {TeamMember as TeamMemberType } from "@/payload-types"
 
-// Assuming TeamMember type is defined elsewhere or passed appropriately
-interface TeamMember {
-  id: number
-  name: string
-  position: string
-  experience: string
-  image: string
-}
 
 interface TeamMembersGridProps {
-  members: TeamMember[]
+  members: TeamMemberType[]
   currentPage: number
   totalPages: number
   goToPrevPage: () => void
@@ -50,12 +43,12 @@ export function TeamMembersGrid({
                   }}
                 >
                   <div className="absolute -top-3 -right-3 bg-yellow-300 rounded-full px-3 py-1 text-xs font-bold border-2 border-black transform rotate-12">
-                    {member.experience}
+                    {member.experience} Years
                   </div>
                   <div className="relative">
                     <div className="absolute inset-0 bg-yellow-300 rounded-full transform scale-105 border-4 border-black"></div>
                     <Image
-                      src={member.image || "/placeholder.svg"}
+                      src={(typeof member.image === 'object' && member.image?.url) || "/placeholder.svg"}
                       alt={member.name}
                       width={150}
                       height={150}
