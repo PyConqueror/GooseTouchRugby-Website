@@ -78,7 +78,7 @@ export function NewsList({
                     })}                        </div>
                       </div>
                       <h3 className="text-xl font-heading">{article.title}</h3>
-                      <p className="text-black line-clamp-3">{article.content}</p>
+                      <p className="text-black line-clamp-3 break-all">{article.content}</p>
                     </div>
                     <Button
                       variant="outline"
