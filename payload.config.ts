@@ -8,11 +8,11 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { NewsArticles } from './collections/NewsArticles'
-import { TeamMembers } from './collections/TeamMembers'
-import { Fixtures } from './collections/Fixtures'
-import { NewsGlobal } from './globals/NewsGlobal'
-import { ProfilePicture } from './collections/ProfilePicture'
+import { NewsArticles } from './collections/NewsArticles.ts'
+import { TeamMembers } from './collections/TeamMembers.ts'
+import { Fixtures } from './collections/Fixtures.ts'
+import { NewsGlobal } from './globals/NewsGlobal.ts'
+import { ProfilePicture } from './collections/ProfilePicture.ts'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 const filename = fileURLToPath(import.meta.url)
@@ -29,7 +29,7 @@ export default buildConfig({
   globals: [NewsGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
-  sharp: sharp,
+  sharp: sharp as any,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
