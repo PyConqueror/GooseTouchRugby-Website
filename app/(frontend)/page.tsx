@@ -27,6 +27,13 @@ export default async function Home() {
     sort: "order",
   })
 
+  const fixtures = await (await payload).find({
+    collection: "fixtures",
+    limit: 4,
+    depth: 1,
+    sort: "date",
+  })
+
   return (
     <div className="flex min-h-screen flex-col bg-yellow-50 font-comic">
       <Navbar />
@@ -34,7 +41,7 @@ export default async function Home() {
         <HeroSection />
         <AboutSection />
         <PlayerSection teamMembers={teamMembers.docs}/>
-        <FixturesResultsSection />
+        <FixturesResultsSection fixtures={fixtures.docs} />
         <NewsSection data={newsArticles.docs} />
         <GetInTouchSection />
       </main>

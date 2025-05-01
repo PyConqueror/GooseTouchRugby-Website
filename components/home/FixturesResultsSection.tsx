@@ -3,34 +3,12 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, ChevronRight } from "lucide-react"
+import { Fixture as FixtureType } from "@/payload-types"
+import { formatDate, formatTime } from "@/utils/dateUtils"
 
-// Sample data - consider moving this to a separate file or fetching from an API
-const matches = [
-  {
-    date: "May 15, 2025",
-    opponent: "Flying Eagles",
-    location: "Home",
-    time: "14:00",
-    result: "Upcoming",
-  },
-  { date: "May 8, 2025", opponent: "River Hawks", location: "Away", time: "15:30", result: "Won 24-18" },
-  {
-    date: "May 1, 2025",
-    opponent: "Mountain Lions",
-    location: "Home",
-    time: "14:00",
-    result: "Lost 15-22",
-  },
-  {
-    date: "April 24, 2025",
-    opponent: "Valley Tigers",
-    location: "Away",
-    time: "16:00",
-    result: "Won 30-12",
-  },
-]
+export function FixturesResultsSection({ fixtures }: { fixtures: FixtureType[] }) {
+  const matches = fixtures as FixtureType[]
 
-export function FixturesResultsSection() {
   return (
     <section id="fixtures" className="w-full py-12 md:py-24 lg:py-32 bg-white relative">
       <div className="container px-4 md:px-6">
@@ -54,7 +32,7 @@ export function FixturesResultsSection() {
                 <div className="flex items-center gap-2">
                   <Calendar className="h-5 w-5 text-orange-500" />
                   <span className="text-sm font-bold bg-yellow-200 px-2 py-1 rounded-full border-2 border-black">
-                    {match.date}
+                    {formatDate(match.date)}
                   </span>
                 </div>
                 <h3 className="text-xl font-heading mt-2">Goose Touch Rugby vs {match.opponent}</h3>
@@ -63,18 +41,18 @@ export function FixturesResultsSection() {
                 <div className="flex items-center gap-2">
                   <MapPin className="h-5 w-5 text-orange-500" />
                   <span className="text-sm font-medium">
-                    {match.location} • {match.time}
+                    {match.location} • {formatTime(match.time)}
                   </span>
                 </div>
                 <span
-                  className={`text-sm font-bold px-3 py-1 rounded-full border-2 border-black ${match.result === "Upcoming"
+                  className={`text-sm font-bold px-3 py-1 rounded-full border-2 border-black ${match.status === "Upcoming"
                       ? "bg-blue-200"
-                      : match.result.includes("Won")
+                      : match.status.includes("Won")
                         ? "bg-yellow-300"
                         : "bg-red-200"
                     }`}
                 >
-                  {match.result}
+                  {match.status}
                 </span>
               </div>
             </div>
