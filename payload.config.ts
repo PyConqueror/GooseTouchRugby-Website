@@ -44,6 +44,7 @@ export default buildConfig({
       collections: {
         media: true,
         'profile-picture': true,
+        'opponent-picture': true,
       },
       token: process.env.BLOB_READ_WRITE_TOKEN,
     }),
