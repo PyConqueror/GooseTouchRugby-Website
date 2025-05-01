@@ -189,9 +189,9 @@ export interface Fixture {
   time: string;
   modifedTitle?: string | null;
   opponent: string;
-  opponentPicture?: string | OpponentPicture | null;
+  image: string | OpponentPicture;
   location: string;
-  status: 'upcoming' | 'won' | 'lost';
+  status: 'Upcoming' | 'Won' | 'Lost' | 'Draw';
   result?: {
     ourScore?: number | null;
     opponentScore?: number | null;
@@ -237,8 +237,8 @@ export interface OpponentPicture {
       mimeType?: string | null;
       filesize?: number | null;
       filename?: string | null;
-    };
-  };
+    } | null;
+  } | null;
 }
 
 declare module 'payload' {
