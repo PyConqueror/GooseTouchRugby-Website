@@ -13,6 +13,10 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'news-articles': NewsArticle;
+    'team-members': TeamMember;
+    fixtures: Fixture;
+    'profile-picture': ProfilePicture;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -151,6 +155,64 @@ export interface NewsArticle {
     | 'training';
   updatedAt: string;
   createdAt: string;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  position:
+    | 'Wing'
+    | 'Scrum Half'
+    | 'Fly Half'
+    | 'Center'
+    | 'Full Back'
+    | 'Prop'
+    | 'Hooker'
+    | 'Lock'
+    | 'Flanker'
+    | 'Founder'
+    | 'co-Founder'
+    | 'Coach'
+    | 'Fitness Coach'
+    | 'Team Manager';
+  experience: number;
+  image: string | ProfilePicture; // Relation to ProfilePicture
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+
+export interface Fixture {
+  id: string;
+  date: string;
+  time: string;
+  modifedTitle?: string | null;
+  opponent: string;
+  location: string;
+  status: 'upcoming' | 'won' | 'lost';
+  result?: {
+    ourScore?: number | null;
+    opponentScore?: number | null;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+
+export interface ProfilePicture {
+  id: string;
+  Name?: string | null;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 
 declare module 'payload' {
