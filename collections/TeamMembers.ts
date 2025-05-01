@@ -47,7 +47,7 @@ export const TeamMembers: CollectionConfig = {
         name: 'image',
         type: 'upload',
         label: 'Featured Image',
-        relationTo: 'media',
+        relationTo: 'profile-picture',
         required: true,
         admin: {
             description: 'Profile picture',
