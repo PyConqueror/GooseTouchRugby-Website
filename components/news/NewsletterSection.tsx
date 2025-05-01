@@ -2,7 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
-export function NewsletterSection() {
+export function NewsletterSection({ data }: { data: String }) {
+  console.log(data)
   return (
     <section className="w-full py-12 md:py-24 bg-yellow-50 relative">
       <div className="absolute top-10 left-10 w-20 h-20 md:w-32 md:h-32 animate-bounce">
@@ -35,7 +36,7 @@ export function NewsletterSection() {
             <div className="bg-white p-6 rounded-xl border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
               <div className="flex justify-center">
                 {/* Ensure the WhatsApp link is correct */}
-                <a href="https://whatsapp.com/channel/example-link" target="_blank" rel="noopener noreferrer">
+                <a href={data as string} target="_blank" rel="noopener noreferrer">
                   <Button className="rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1 px-8 py-3">
                     Subscribe via WhatsApp
                   </Button>

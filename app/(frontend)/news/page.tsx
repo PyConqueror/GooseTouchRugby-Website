@@ -13,6 +13,9 @@ export default async function NewsPage() {
     limit: 1000,
     depth: 1,
   })
+  const getInTouch = await (await payload).findGlobal({
+    slug: "get-in-touch",
+  })
 
 
   return (
@@ -20,7 +23,7 @@ export default async function NewsPage() {
       <Navbar />
       <main className="flex-1">
         <NewsDisplay data={newsArticles.docs} />
-        <NewsletterSection />
+        <NewsletterSection data={getInTouch.whatsapp ?? ''}/>
       </main>
       <Footer />
     </div>

@@ -113,7 +113,7 @@ export function GetInTouchSection({ data }: { data: GetInTouchGlobalType }) {
                 variant="outline"
                 size="icon"
                 className="rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
-                // onClick={() => window.open(data.whatsapp ?? '', '_blank')}
+                onClick={() => window.open(data.whatsapp ?? '', '_blank')}
               >
                 <WhatsappIcon className="h-5 w-5" />
                 <span className="sr-only">WhatsApp</span>
