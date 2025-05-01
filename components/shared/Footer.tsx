@@ -11,18 +11,14 @@ export function Footer() {
           <Image src="/logo.svg" alt="Goose Touch Rugby Logo" width={40} height={40} className="h-10 w-auto" />
           <p className="text-sm font-bold text-black">© 2025 Goose Touch Rugby. All rights reserved.</p>
         </div>
-        <nav className="flex gap-4 sm:gap-6">
-          {/* TODO: Update hrefs for policy links */}
-          <Link href="/privacy-policy" className="text-sm font-medium text-black hover:underline underline-offset-4">
-            Privacy Policy
-          </Link>
-          <Link href="/terms-of-service" className="text-sm font-medium text-black hover:underline underline-offset-4">
-            Terms of Service
-          </Link>
-          <Link href="/cookie-policy" className="text-sm font-medium text-black hover:underline underline-offset-4">
-            Cookie Policy
-          </Link>
-        </nav>
+        <Link
+          href="https://www.wanaqim.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-medium text-black hover:underline underline-offset-4"
+        >
+          Built and managed by Wan Aqim ©
+        </Link>
       </div>
     </footer>
   )
