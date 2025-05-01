@@ -54,14 +54,13 @@ export const Fixtures: CollectionConfig = {
       },
     },
     {
-      name: 'opponentPicture',
-      label: 'Opponent Picture',
-      type: 'relationship',
+      name: 'image',
+      type: 'upload',
+      label: 'Featured Image',
       relationTo: 'opponent-picture',
-      hasMany: false,
-      required: false,
+      required: true,
       admin: {
-        description: 'Select the picture associated with the opponent team.',
+          description: 'Opponent Team Logo',
       },
     },
     {
@@ -79,12 +78,13 @@ export const Fixtures: CollectionConfig = {
       label: 'Match Status', 
       type: 'select',
       options: [
-        { label: 'Upcoming', value: 'upcoming' },
-        { label: 'Won', value: 'won' },
-        { label: 'Lost', value: 'lost' },
+        { label: 'Upcoming', value: 'Upcoming' },
+        { label: 'Won', value: 'Won' },
+        { label: 'Lost', value: 'Lost' },
+        { label: 'Draw', value: 'Draw' },
       ],
       required: true,
-      defaultValue: 'upcoming',
+      defaultValue: 'Upcoming',
       admin: {
         description: 'The current status of the match.', 
       },
