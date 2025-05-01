@@ -24,6 +24,7 @@ export default function RootLayout({
         />
         {/* Add Genty Demo font */}
         <link href="https://fonts.cdnfonts.com/css/genty-demo" rel="stylesheet" />
+        <link rel="icon" href="/katoon.png" sizes="any" />
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
