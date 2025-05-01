@@ -26,6 +26,7 @@ export interface Config {
   };
   globals: {
     'news-global': NewsGlobal;
+    'get-in-touch': GetInTouch;
   };
   locale: null;
   user: User & {
@@ -239,6 +240,21 @@ export interface OpponentPicture {
       filename?: string | null;
     } | null;
   } | null;
+}
+
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "get-in-touch".
+ */
+export interface GetInTouch {
+  id: string;
+  email: string;
+  phone: string;
+  address: string;
+  instagram?: string | null;
+  whatsapp?: string | null;
+  twitter?: string | null;
+  globalType?: 'get-in-touch';
 }
 
 declare module 'payload' {
