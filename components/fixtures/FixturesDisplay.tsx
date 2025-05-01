@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from "react"
 import { FixturesHeader } from "./FixturesHeader"
-import { FixturesList, Fixture } from "./FixturesList"
+import { FixturesList } from "./FixturesList"
+import type { Fixture as FixtureType } from "@/payload-types"
 
 interface FixturesDisplayProps {
-  initialFixtures: Fixture[]
+  data: FixtureType[]
 }
 
-export function FixturesDisplay({ initialFixtures }: FixturesDisplayProps) {
-  const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming")
+export function FixturesDisplay({ data }: FixturesDisplayProps) {
+  const [activeTab, setActiveTab] = useState<"upcoming" | "past">("past")
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(4) // Default, will be updated
   const [totalPages, setTotalPages] = useState(1)
@@ -34,9 +35,13 @@ export function FixturesDisplay({ initialFixtures }: FixturesDisplayProps) {
   }, [])
 
   // Filter fixtures based on active tab
-  const filteredFixtures = initialFixtures.filter(
-    (fixture) => fixture.status === activeTab,
-  )
+  const filteredFixtures = data.filter((fixture) => {
+    if (activeTab === "upcoming") {
+      return fixture.status === "Upcoming";
+    } else { // activeTab === "past"
+      return fixture.status === "Won" || fixture.status === "Lost" || fixture.status === "Draw";
+    }
+  });
 
   // Calculate total pages whenever filtered fixtures or itemsPerPage change
   useEffect(() => {

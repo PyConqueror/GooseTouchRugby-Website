@@ -29,17 +29,6 @@ export function FixturesHeader({ activeTab, setActiveTab }: FixturesHeaderProps)
             <div className="bg-white p-4 rounded-xl border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)]">
               <div className="flex gap-4">
                 <button
-                  onClick={() => setActiveTab("upcoming")}
-                  className={`px-4 py-2 rounded-xl border-2 border-black font-bold ${
-                    activeTab === "upcoming" ? "bg-yellow-400" : "bg-yellow-200 hover:bg-yellow-300"
-                  } transition-colors`}
-                >
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-5 w-5" />
-                    <span>Upcoming Matches</span>
-                  </div>
-                </button>
-                <button
                   onClick={() => setActiveTab("past")}
                   className={`px-4 py-2 rounded-xl border-2 border-black font-bold ${
                     activeTab === "past" ? "bg-yellow-400" : "bg-yellow-200 hover:bg-yellow-300"
@@ -48,6 +37,17 @@ export function FixturesHeader({ activeTab, setActiveTab }: FixturesHeaderProps)
                   <div className="flex items-center gap-2">
                     <Trophy className="h-5 w-5" />
                     <span>Past Results</span>
+                  </div>
+                </button>
+                <button
+                  onClick={() => setActiveTab("upcoming")}
+                  className={`px-4 py-2 rounded-xl border-2 border-black font-bold ${
+                    activeTab === "upcoming" ? "bg-yellow-400" : "bg-yellow-200 hover:bg-yellow-300"
+                  } transition-colors`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-5 w-5" />
+                    <span>Upcoming Matches</span>
                   </div>
                 </button>
               </div>

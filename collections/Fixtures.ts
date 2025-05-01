@@ -58,7 +58,7 @@ export const Fixtures: CollectionConfig = {
       type: 'upload',
       label: 'Featured Image',
       relationTo: 'opponent-picture',
-      required: true,
+      required: false,
       admin: {
           description: 'Opponent Team Logo',
       },

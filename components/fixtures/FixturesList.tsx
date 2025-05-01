@@ -3,26 +3,12 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react"
-
+import type { Fixture as FixtureType } from "@/payload-types"
+import { formatDate } from "@/utils/dateUtils"
 // Define Fixture type (adjust based on actual data structure)
-interface FixtureResult {
-  goose: number
-  opponent: number
-  outcome: "win" | "loss" | "draw"
-}
-
-export interface Fixture {
-  id: number
-  date: string
-  opponent: string
-  location: string
-  time: string
-  status: "upcoming" | "past"
-  result: FixtureResult | null
-}
 
 interface FixturesListProps {
-  fixtures: Fixture[]
+  fixtures: FixtureType[]
   currentPage: number
   totalPages: number
   goToPrevPage: () => void
@@ -58,21 +44,17 @@ export function FixturesList({
                     opacity: 0,
                   }}
                 >
-                  {fixture.status === "past" && fixture.result && (
+                  {fixture.status !== "Upcoming" && fixture.result && (
                     <div
                       className={`absolute -top-4 -right-4 px-4 py-2 rounded-xl border-2 border-black font-bold text-white ${
-                        fixture.result?.outcome === "win"
+                        fixture.status === "Won"
                           ? "bg-green-500"
-                          : fixture.result?.outcome === "loss"
+                          : fixture.status === "Lost"
                           ? "bg-red-500"
                           : "bg-blue-500"
                       } transform rotate-6`}
                     >
-                      {fixture.result?.outcome === "win"
-                        ? "WIN!"
-                        : fixture.result?.outcome === "loss"
-                        ? "LOSS"
-                        : "DRAW"}
+                      {fixture.status.toUpperCase()}
                     </div>
                   )}
 
@@ -81,7 +63,7 @@ export function FixturesList({
                       <div className="flex items-center gap-2">
                         <Calendar className="h-5 w-5 text-orange-500" />
                         <span className="text-sm font-bold bg-yellow-200 px-3 py-1 rounded-full border-2 border-black">
-                          {fixture.date}
+                          {formatDate(fixture.date)}
                         </span>
                       </div>
                       <h3 className="text-2xl font-heading">Goose Touch Rugby vs {fixture.opponent}</h3>
@@ -95,18 +77,18 @@ export function FixturesList({
                       </div>
                     </div>
 
-                    {fixture.status === "past" && fixture.result ? (
+                    {fixture.status !== "Upcoming" && fixture.result ? (
                       <div className="flex items-center justify-center col-span-1 lg:col-span-2">
                         <div className="bg-yellow-100 rounded-xl border-4 border-black p-4 w-full max-w-md">
                           <div className="flex justify-between items-center">
                             <div className="text-center space-y-2">
                               <div className="text-sm font-bold">Goose Touch Rugby</div>
-                              <div className="text-4xl font-heading">{fixture.result?.goose}</div>
+                              <div className="text-4xl font-heading">{fixture.result?.ourScore}</div>
                             </div>
                             <div className="text-xl font-bold">VS</div>
                             <div className="text-center space-y-2">
                               <div className="text-sm font-bold">{fixture.opponent}</div>
-                              <div className="text-4xl font-heading">{fixture.result?.opponent}</div>
+                              <div className="text-4xl font-heading">{fixture.result?.opponentScore}</div>
                             </div>
                           </div>
                           <div className="mt-4 text-center">
