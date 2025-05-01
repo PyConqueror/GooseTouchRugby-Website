@@ -5,16 +5,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import type { TeamMember as TeamMemberType } from "@/payload-types"
 
-interface TeamMember {
-  id: number
-  name: string
-  position: string
-  image: string
-}
 
 interface TeamMembersCarouselProps {
-  teamMembers: TeamMember[]
+  teamMembers: TeamMemberType[]
   showViewAllButton?: boolean
 }
 
@@ -109,7 +104,7 @@ export function TeamMembersCarousel({ teamMembers, showViewAllButton = true }: T
               <div className="relative">
                 <div className="absolute inset-0 bg-yellow-300 rounded-full transform scale-105 border-4 border-black"></div>
                 <Image
-                  src={member.image || "/placeholder.svg"}
+                  src={(typeof member.image === 'object' && member.image?.url) || "/placeholder.svg"}
                   alt={`Team member ${member.name}`}
                   width={100}
                   height={100}
