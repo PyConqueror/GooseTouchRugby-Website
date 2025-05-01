@@ -1,12 +1,12 @@
 
-import { Navbar } from "@/components/Navbar"
+import { Navbar } from "@/components/shared/Navbar"
 import { HeroSection } from "@/components/home/HeroSection"
 import { AboutSection } from "@/components/home/AboutSection"
 import { PlayerSection } from "@/components/home/PlayerSection"
 import { FixturesResultsSection } from "@/components/home/FixturesResultsSection"
 import { NewsSection } from "@/components/home/NewsSection"
 import { GetInTouchSection } from "@/components/home/GetInTouchSection"
-import { Footer } from "@/components/Footer"
+import { Footer } from "@/components/shared/Footer"
 import { getPayload } from "payload";
 import config from "@/payload.config"
 
@@ -31,7 +31,7 @@ export default async function Home() {
     collection: "fixtures",
     limit: 4,
     depth: 1,
-    sort: "date",
+    sort: "-date",
   })
 
   return (

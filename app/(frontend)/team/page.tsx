@@ -1,5 +1,5 @@
-import { Navbar } from "@/components/Navbar"
-import { Footer } from "@/components/Footer"
+import { Navbar } from "@/components/shared/Navbar"
+import { Footer } from "@/components/shared/Footer"
 import { JoinTeamSection } from "@/components/team/JoinTeamSection"
 import { TeamDisplay } from "@/components/team/TeamDisplay"
 import { getPayload } from "payload";

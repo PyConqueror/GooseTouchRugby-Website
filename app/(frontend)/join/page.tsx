@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { Navbar } from "@/components/Navbar"
-import { Footer } from "@/components/Footer"
+import { Navbar } from "@/components/shared/Navbar"
+import { Footer } from "@/components/shared/Footer"
 import { JoinHero } from "@/components/join/JoinHero"
 import { JoinFormSection } from "@/components/join/JoinFormSection"
 import { WhatToExpectSection } from "@/components/join/WhatToExpectSection"
