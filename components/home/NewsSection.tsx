@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { NewsArticle as NewsArticleType, NewsGlobal as NewsGlobalType } from "@/payload-types"
 import { NewsModal } from "@/components/news-modal"
+import { NewsCard } from "@/components/shared/NewsCard"
 
 interface NewsSectionProps {
   data: NewsGlobalType;
@@ -42,44 +43,8 @@ export function NewsSection({ data }: NewsSectionProps) {
           </div>
 
           <div className="grid gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3">
-            {newsArticles.map((news, i) => (
-              <div
-                key={i}
-                className="group relative flex flex-col space-y-4 rounded-xl border-4 border-black bg-white p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-2 hover:rotate-1"
-              >
-                <div className="absolute right-4 top-4 z-10 rounded-full bg-yellow-300 px-3 py-1 text-xs font-bold border-2 border-black">
-                  {news.category}
-                </div>
-                <div className="relative h-48 w-full overflow-hidden rounded-lg border-4 border-black">
-                  <Image
-                    src={typeof news.image === 'object' && news.image?.url ? news.image.url : "/placeholder.svg"}
-                    alt={news.title}
-                    fill
-                    className="object-cover transition-transform group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex-1 space-y-2">
-                  <div className="inline-block bg-yellow-200 px-3 py-1 text-sm font-bold rounded-full border-2 border-black">
-                    {new Date(news.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </div>
-                  <h3 className="text-xl font-heading">{news.title}</h3>
-                  <p className="text-black whitespace-pre-wrap">
-                    {news.content.split(' ').slice(0, 40).join(' ')}
-                    {news.content.split(' ').length > 30 ? '...' : ''}
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  className="w-full rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
-                  onClick={() => openArticle(news)} 
-                >
-                  Read More
-                </Button>
-              </div>
+            {newsArticles.map((news) => (
+              <NewsCard key={news.id} news={news} openArticle={openArticle} />
             ))}
           </div>
 
@@ -98,7 +63,9 @@ export function NewsSection({ data }: NewsSectionProps) {
         </div>
       </section>
 
-      <NewsModal article={selectedArticle} isOpen={isModalOpen} onClose={closeModal} />
+      {isModalOpen && (
+        <NewsModal article={selectedArticle} isOpen={isModalOpen} onClose={closeModal} />
+      )}
     </>
   )
 } 
