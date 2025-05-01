@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { NewsArticle as NewsArticleType, NewsGlobal as NewsGlobalType } from "@/payload-types"
-import { NewsModal } from "@/components/news-modal"
+import { NewsModal } from "@/components/shared/NewsModal"
 import { NewsCard } from "@/components/shared/NewsCard"
 
 interface NewsSectionProps {

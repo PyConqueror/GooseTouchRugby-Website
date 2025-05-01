@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { Navbar } from "@/components/navbar"
+import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { JoinHero } from "@/components/join/JoinHero"
 import { JoinFormSection } from "@/components/join/JoinFormSection"

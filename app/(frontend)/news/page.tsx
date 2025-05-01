@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/navbar"
+import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { NewsDisplay } from "@/components/news/NewsDisplay"
 import { NewsletterSection } from "@/components/news/NewsletterSection"

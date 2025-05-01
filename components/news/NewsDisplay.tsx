@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { NewsHeader } from "./NewsHeader"
 import { NewsList } from "./NewsList"
-import { NewsModal } from "@/components/news-modal" // Assuming modal path
+import { NewsModal } from "@/components/shared/NewsModal" // Assuming modal path
 import type { NewsArticle as NewsArticleType, NewsGlobal as NewsGlobalType } from "@/payload-types"
 
 interface NewsDisplayProps {

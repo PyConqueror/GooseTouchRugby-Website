@@ -242,7 +242,7 @@ export function JoinFormSection() {
                 </div>
 
                 <div className="relative">
-                  <div className="absolute -top-6 -right-6 transform rotate-12">
+                  <div className="absolute -top-6 -right-6 transform rotate-12 z-10">
                     <div className="bg-white px-4 py-2 rounded-xl border-2 border-black shadow-md">
                       <p className="text-sm font-bold">No experience needed!</p>
                     </div>
