@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload'
-
+import { revalidateTag } from 'next/cache';
 export const NewsArticles: CollectionConfig = {
   slug: 'news-articles',
   admin: {
@@ -73,5 +73,16 @@ export const NewsArticles: CollectionConfig = {
       },
     },
   ],
-}
+  hooks: {
+    afterChange: [
+      ({ doc, req: { payload, context } }) => {
+        if (!context.disableRevalidate) {
+          payload.logger.info(`Revalidating News Articles`);
+          revalidateTag('news-articles');
+        } 
+        return doc;
+      },
+    ],
+  },
+};
 

@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-
+import { revalidateTag } from 'next/cache';
 export const Fixtures: CollectionConfig = {
   slug: 'fixtures',
   admin: {
@@ -125,6 +125,15 @@ export const Fixtures: CollectionConfig = {
         doc.modifedTitle = `Goose VS ${doc.opponent}`;
         return doc;
       }
-    ]
+    ],
+    afterChange: [
+      ({ doc, req: { payload, context } }) => {
+        if (!context.disableRevalidate) {
+          payload.logger.info(`Revalidating Fixtures`);
+          revalidateTag('fixtures');
+        }
+        return doc;
+      },
+    ],
   },
-}
+};

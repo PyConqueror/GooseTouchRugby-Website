@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { revalidateTag } from 'next/cache';
 
 export const TeamMembers: CollectionConfig = {
   slug: 'team-members',
@@ -61,6 +62,17 @@ export const TeamMembers: CollectionConfig = {
       admin: {
         description: 'Display order (lower numbers appear first)',
       },
-    },
+    },  
   ],
+  hooks: {
+    afterChange: [
+      ({ doc, req: { payload, context } }) => {
+        if (!context.disableRevalidate) {
+          payload.logger.info(`Revalidating Team Members`);
+          revalidateTag('team-members');
+        }
+        return doc;
+      },
+    ],
+  },
 }; 
