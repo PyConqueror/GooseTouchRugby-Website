@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, ChevronRight } from "lucide-react"
 import { Fixture as FixtureType } from "@/payload-types"
-import { formatDate, formatTime } from "@/utils/dateUtils"
+import { formatDate, formatTime } from "@/utilities/dateUtils"
 
 export function FixturesResultsSection({ fixtures }: { fixtures: FixtureType[] }) {
   const matches = fixtures as FixtureType[]

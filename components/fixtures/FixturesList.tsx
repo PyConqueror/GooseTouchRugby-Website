@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react"
 import type { Fixture as FixtureType } from "@/payload-types"
-import { formatDate, formatTime } from "@/utils/dateUtils"
+import { formatDate, formatTime } from "@/utilities/dateUtils"
 // Define Fixture type (adjust based on actual data structure)
 
 interface FixturesListProps {

@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, X } from "lucide-react"
 import type { NewsArticle as NewsArticleType } from "@/payload-types"
-import { formatDate } from "@/utils/dateUtils"
+import { formatDate } from "@/utilities/dateUtils"
 
 interface NewsModalProps {
   article: NewsArticleType | null

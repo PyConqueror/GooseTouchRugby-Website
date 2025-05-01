@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import type { NewsArticle as NewsArticleType } from "@/payload-types";
-import { formatDate } from "@/utils/dateUtils";
+import { formatDate } from "@/utilities/dateUtils";
 
 interface NewsCardProps {
   news: NewsArticleType;
