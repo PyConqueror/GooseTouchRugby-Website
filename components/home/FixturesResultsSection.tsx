@@ -45,7 +45,7 @@ export function FixturesResultsSection({ fixtures }: { fixtures: FixtureType[] }
                   </span>
                 </div>
                 <span
-                  className={`text-sm font-bold px-3 py-1 rounded-full border-2 border-black ${match.status === "Upcoming"
+                  className={`w-fit text-sm font-bold px-5 py-1 rounded-full border-2 border-black ${match.status === "Upcoming"
                       ? "bg-blue-200"
                       : match.status.includes("Won")
                         ? "bg-yellow-300"
