@@ -34,6 +34,10 @@ export default async function Home() {
     sort: "-date",
   })
 
+  const getInTouch = await (await payload).findGlobal({
+    slug: "get-in-touch",
+  })
+
   return (
     <div className="flex min-h-screen flex-col bg-yellow-50 font-comic">
       <Navbar />
@@ -43,7 +47,7 @@ export default async function Home() {
         <PlayerSection teamMembers={teamMembers.docs}/>
         <FixturesResultsSection fixtures={fixtures.docs} />
         <NewsSection data={newsArticles.docs} />
-        <GetInTouchSection />
+        <GetInTouchSection data={getInTouch} />
       </main>
       <Footer />
     </div>

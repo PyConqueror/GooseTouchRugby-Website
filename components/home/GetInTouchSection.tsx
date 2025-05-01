@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Mail, Phone, MapPin } from "lucide-react"
-
+import { GetInTouch as GetInTouchGlobalType } from "@/payload-types"
 // Consider creating separate components for social media icons if reused elsewhere
 function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -44,26 +44,28 @@ function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-function TwitterIcon(props: React.SVGProps<SVGSVGElement>) {
+
+function WhatsappIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+  >
+    <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"></path>
+      <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"></path>
     </svg>
   )
 }
 
-export function GetInTouchSection() {
+export function GetInTouchSection({ data }: { data: GetInTouchGlobalType }) {
   // TODO: Implement form submission logic
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -90,19 +92,19 @@ export function GetInTouchSection() {
                 <div className="bg-yellow-300 p-2 rounded-full border-2 border-black">
                   <Mail className="h-5 w-5 text-black" />
                 </div>
-                <span className="font-medium">info@goosetouvhrugby.com</span>
+                <span className="font-medium">{data.email}</span>
               </div>
               <div className="flex items-center gap-3 bg-yellow-100 p-3 rounded-xl border-2 border-black">
                 <div className="bg-yellow-300 p-2 rounded-full border-2 border-black">
                   <Phone className="h-5 w-5 text-black" />
                 </div>
-                <span className="font-medium">+1 (555) 123-4567</span>
+                <span className="font-medium">{data.phone}</span>
               </div>
               <div className="flex items-center gap-3 bg-yellow-100 p-3 rounded-xl border-2 border-black">
                 <div className="bg-yellow-300 p-2 rounded-full border-2 border-black">
                   <MapPin className="h-5 w-5 text-black" />
                 </div>
-                <span className="font-medium">123 Rugby Field Lane, Sportsville</span>
+                <span className="font-medium">{data.address}</span>
               </div>
             </div>
             <div className="flex gap-4 mt-6">
@@ -111,25 +113,19 @@ export function GetInTouchSection() {
                 variant="outline"
                 size="icon"
                 className="rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
+                onClick={() => window.open(data.whatsapp ?? '', '_blank')}
               >
-                <FacebookIcon className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
+                <WhatsappIcon className="h-5 w-5" />
+                <span className="sr-only">WhatsApp</span>
               </Button>
               <Button
                 variant="outline"
                 size="icon"
                 className="rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
+                // onClick={() => window.open(data.instagram ?? '', '_blank')}
               >
                 <InstagramIcon className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full border-2 border-black text-black hover:bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform transition-transform hover:-translate-y-1"
-              >
-                <TwitterIcon className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
               </Button>
             </div>
           </div>
