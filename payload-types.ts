@@ -28,6 +28,7 @@ export interface Config {
     'news-global': NewsGlobal;
     'get-in-touch': GetInTouch;
     'about-section': AboutSectionGlobal;
+    'fixtures-section': FixturesSectionGlobal;
   };
   locale: null;
   user: User & {
@@ -275,6 +276,18 @@ export interface AboutSectionGlobal {
   createdAt: string;
   _status?: ('draft' | 'published');
   globalType?: 'about-section';
+}
+
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "fixtures-section".
+ */
+export interface FixturesSectionGlobal {
+  id: string;
+  featuredFixtures?: (string | Fixture)[] | null;
+  updatedAt: string;
+  createdAt: string;
+  globalType?: 'fixtures-section';
 }
 
 declare module 'payload' {
