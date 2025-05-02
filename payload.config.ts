@@ -26,6 +26,10 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    livePreview: {
+      url: process.env.NEXT_PUBLIC_SERVER_URL + '/#contact',
+      globals: ['get-in-touch'],
+    },
   },
   collections: [Users, Media, NewsArticles, TeamMembers, Fixtures, ProfilePicture, OpponentPicture],
   globals: [NewsGlobal, GetIntouchGlobal],

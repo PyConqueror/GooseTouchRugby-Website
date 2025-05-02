@@ -7,6 +7,11 @@ export const GetIntouchGlobal: GlobalConfig = {
   access: {
     read: () => true,
   },
+  versions: {
+    drafts: {
+      autosave: true,
+    },
+  },
   fields: [
     {
       name: 'email',

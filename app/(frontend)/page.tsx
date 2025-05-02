@@ -8,6 +8,7 @@ import { NewsSection } from "@/components/home/NewsSection"
 import { GetInTouchSection } from "@/components/home/GetInTouchSection"
 import { Footer } from "@/components/shared/Footer"
 import { getPayload } from "payload";
+import { RefreshRouteOnSave } from "@/utilities/RefreshRouteOnSave";
 import config from "@/payload.config"
 
 export default async function Home() {
@@ -41,6 +42,7 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-yellow-50 font-comic">
       <Navbar />
+      <RefreshRouteOnSave />
       <main className="flex-1">
         <HeroSection />
         <AboutSection />
