@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 export const Fixtures: CollectionConfig = {
   slug: 'fixtures',
   admin: {
@@ -130,7 +130,8 @@ export const Fixtures: CollectionConfig = {
       ({ doc, req: { payload, context } }) => {
         if (!context.disableRevalidate) {
           payload.logger.info(`Revalidating Fixtures`);
-          revalidateTag('fixtures');
+          revalidatePath('/');
+          revalidatePath('/fixtures');
         }
         return doc;
       },

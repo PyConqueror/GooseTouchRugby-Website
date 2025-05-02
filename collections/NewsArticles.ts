@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload'
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 export const NewsArticles: CollectionConfig = {
   slug: 'news-articles',
   admin: {
@@ -78,7 +78,8 @@ export const NewsArticles: CollectionConfig = {
       ({ doc, req: { payload, context } }) => {
         if (!context.disableRevalidate) {
           payload.logger.info(`Revalidating News Articles`);
-          revalidateTag('news-articles');
+          revalidatePath('/');
+          revalidatePath('/news');
         } 
         return doc;
       },

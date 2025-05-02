@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 
 export const TeamMembers: CollectionConfig = {
   slug: 'team-members',
@@ -69,7 +69,8 @@ export const TeamMembers: CollectionConfig = {
       ({ doc, req: { payload, context } }) => {
         if (!context.disableRevalidate) {
           payload.logger.info(`Revalidating Team Members`);
-          revalidateTag('team-members');
+          revalidatePath('/');
+          revalidatePath('/team');
         }
         return doc;
       },
