@@ -27,6 +27,7 @@ export interface Config {
   globals: {
     'news-global': NewsGlobal;
     'get-in-touch': GetInTouch;
+    'about-section': AboutSectionGlobal;
   };
   locale: null;
   user: User & {
@@ -255,6 +256,25 @@ export interface GetInTouch {
   whatsapp?: string | null;
   twitter?: string | null;
   globalType?: 'get-in-touch';
+}
+
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-section".
+ */
+export interface AboutSectionGlobal {
+  id: string;
+  description?: string | null;
+  firstBoxTitle?: string | null;
+  firstBoxDescription?: string | null;
+  secondBoxTitle?: string | null;
+  secondBoxDescription?: string | null;
+  thirdBoxTitle?: string | null;
+  thirdBoxDescription?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published');
+  globalType?: 'about-section';
 }
 
 declare module 'payload' {
