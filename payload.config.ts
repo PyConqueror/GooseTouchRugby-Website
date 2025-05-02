@@ -14,6 +14,7 @@ import { Fixtures } from './collections/Fixtures.ts'
 import { NewsGlobal } from './globals/NewsGlobal.ts'
 import { GetIntouchGlobal } from './globals/GetInTouchGlobal.ts'
 import { AboutSectionGlobal } from './globals/AboutGlobal.ts'
+import { FixturesSectionGlobal } from './globals/FixturesSectionGlobal.ts'
 import { ProfilePicture } from './collections/ProfilePicture.ts'
 import { OpponentPicture } from './collections/OpponentPicture.ts'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
@@ -36,13 +37,16 @@ export default buildConfig({
         if (globalConfig?.slug === 'about-section') {
           return `${baseUrl}/#about`;
         }
+        if (globalConfig?.slug === 'fixtures-section') {
+          return `${baseUrl}/#fixtures`;
+        }
         return baseUrl;
       },
-      globals: ['get-in-touch', 'about-section'],
+      globals: ['get-in-touch', 'about-section', 'fixtures-section'],
     },
   },
   collections: [Users, Media, NewsArticles, TeamMembers, Fixtures, ProfilePicture, OpponentPicture],
-  globals: [GetIntouchGlobal, AboutSectionGlobal],
+  globals: [GetIntouchGlobal, AboutSectionGlobal, FixturesSectionGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   sharp: sharp as any,
