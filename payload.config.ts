@@ -28,12 +28,21 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     livePreview: {
-      url: process.env.NEXT_PUBLIC_SERVER_URL + '/#contact',
-      globals: ['get-in-touch'],
+      url: ({ globalConfig }) => {
+        const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || '';
+        if (globalConfig?.slug === 'get-in-touch') {
+          return `${baseUrl}/#contact`;
+        } 
+        if (globalConfig?.slug === 'about-section') {
+          return `${baseUrl}/#about`;
+        }
+        return baseUrl;
+      },
+      globals: ['get-in-touch', 'about-section'],
     },
   },
   collections: [Users, Media, NewsArticles, TeamMembers, Fixtures, ProfilePicture, OpponentPicture],
-  globals: [NewsGlobal, GetIntouchGlobal, AboutSectionGlobal],
+  globals: [GetIntouchGlobal, AboutSectionGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   sharp: sharp as any,
