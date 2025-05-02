@@ -28,11 +28,8 @@ export default async function Home() {
     sort: "order",
   })
 
-  const fixtures = await (await payload).find({
-    collection: "fixtures",
-    limit: 4,
-    depth: 1,
-    sort: "-date",
+  const fixtures = await (await payload).findGlobal({
+    slug: "fixtures-section",
   })
 
   const getInTouch = await (await payload).findGlobal({
@@ -51,7 +48,7 @@ export default async function Home() {
         <HeroSection />
         <AboutSection aboutSection={aboutSection} />
         <PlayerSection teamMembers={teamMembers.docs}/>
-        <FixturesResultsSection fixtures={fixtures.docs} />
+        <FixturesResultsSection data={fixtures} />
         <NewsSection data={newsArticles.docs} />
         <GetInTouchSection data={getInTouch} />
       </main>
