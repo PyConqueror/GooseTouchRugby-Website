@@ -39,13 +39,17 @@ export default async function Home() {
     slug: "get-in-touch",
   })
 
+  const aboutSection = await (await payload).findGlobal({
+    slug: "about-section",
+  })
+
   return (
     <div className="flex min-h-screen flex-col bg-yellow-50 font-comic">
       <Navbar />
       <RefreshRouteOnSave />
       <main className="flex-1">
         <HeroSection />
-        <AboutSection />
+        <AboutSection aboutSection={aboutSection} />
         <PlayerSection teamMembers={teamMembers.docs}/>
         <FixturesResultsSection fixtures={fixtures.docs} />
         <NewsSection data={newsArticles.docs} />
