@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/shared/Navbar"
 import { HeroSection } from "@/components/home/HeroSection"
 import { AboutSection } from "@/components/home/AboutSection"
@@ -13,27 +12,15 @@ import config from "@/payload.config"
 
 export default async function Home() {
 
-  const payload = getPayload({ config })
+  const payload = await getPayload({ config })
 
-  const newsArticles = await (await payload).findGlobal({
-    slug: "news-global",
-  })
-
-  const teamMembers = await (await payload).findGlobal({
-    slug: "team-members-section",
-  })
-
-  const fixtures = await (await payload).findGlobal({
-    slug: "fixtures-section",
-  })
-
-  const getInTouch = await (await payload).findGlobal({
-    slug: "get-in-touch",
-  })
-
-  const aboutSection = await (await payload).findGlobal({
-    slug: "about-section",
-  })
+  const [newsArticles, teamMembers, fixtures, getInTouch, aboutSection] = await Promise.all([
+    payload.findGlobal({ slug: "news-global" }),
+    payload.findGlobal({ slug: "team-members-section" }),
+    payload.findGlobal({ slug: "fixtures-section" }),
+    payload.findGlobal({ slug: "get-in-touch" }),
+    payload.findGlobal({ slug: "about-section" }),
+  ]);
 
   return (
     <div className="flex min-h-screen flex-col bg-yellow-50 font-comic">
