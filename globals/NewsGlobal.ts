@@ -1,8 +1,10 @@
 import { GlobalConfig } from 'payload';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import type { NewsArticle } from '../payload-types';
+
 export const NewsGlobal: GlobalConfig = {
   slug: 'news-global',
+  label: 'News Section Information',
   access: {
     read: () => true,
   },
@@ -12,9 +14,10 @@ export const NewsGlobal: GlobalConfig = {
       type: 'relationship',
       label: 'Featured News Articles',
       relationTo: 'news-articles',
-      hasMany: true, // Allow selecting multiple articles
+      hasMany: true,
+      maxRows: 3, // Limit selection to 3 articles
       admin: {
-        description: 'Select news articles to feature globally.',
+        description: 'Select up to 3 news articles to feature globally.',
       },
     },
   ],
@@ -22,8 +25,8 @@ export const NewsGlobal: GlobalConfig = {
     afterChange: [
       ({ doc, req: { payload, context } }) => {
         if (!context.disableRevalidate) {
-          payload.logger.info(`Revalidating`)
-          revalidateTag('news-global')
+          payload.logger.info(`Revalidating homepage (News Global)`);
+          revalidatePath('/');
         }
         return doc
       },
