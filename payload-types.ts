@@ -29,6 +29,7 @@ export interface Config {
     'get-in-touch': GetInTouch;
     'about-section': AboutSectionGlobal;
     'fixtures-section': FixturesSectionGlobal;
+    'team-members-section': TeamMembersSectionGlobal;
   };
   locale: null;
   user: User & {
@@ -288,6 +289,18 @@ export interface FixturesSectionGlobal {
   updatedAt: string;
   createdAt: string;
   globalType?: 'fixtures-section';
+}
+
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members-section".
+ */
+export interface TeamMembersSectionGlobal {
+  id: string;
+  featuredTeamMembers?: (string | TeamMember)[] | null;
+  updatedAt: string;
+  createdAt: string;
+  globalType?: 'team-members-section';
 }
 
 declare module 'payload' {
