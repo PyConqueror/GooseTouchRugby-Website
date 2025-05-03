@@ -41,7 +41,7 @@ export default async function Home() {
       <RefreshRouteOnSave />
       <main className="flex-1">
         <HeroSection />
-        <AboutSection aboutSection={aboutSection} />
+        <AboutSection data={aboutSection} />
         <PlayerSection data={teamMembers}/>
         <FixturesResultsSection data={fixtures} />
         <NewsSection data={newsArticles} />

@@ -2,7 +2,7 @@
 import Image from "next/image"
 import { AboutSectionGlobal  as AboutSectionGlobalType } from "@/payload-types"
 
-export function AboutSection({ aboutSection }: { aboutSection: AboutSectionGlobalType }) {
+export function AboutSection({ data }: { data: AboutSectionGlobalType }) {
   return (
     <section id="about" className="w-full py-12 md:py-24 lg:py-32 bg-white relative">
       <div className="container px-4 md:px-6">
@@ -13,7 +13,7 @@ export function AboutSection({ aboutSection }: { aboutSection: AboutSectionGloba
             </h2>
           </div>
           <p className="max-w-[900px] text-black md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed font-medium">
-            {aboutSection.description}
+            {data.description}
           </p>
         </div>
         <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
@@ -29,21 +29,21 @@ export function AboutSection({ aboutSection }: { aboutSection: AboutSectionGloba
           </div>
           <div className="flex flex-col justify-center space-y-6">
             <div className="bg-white rounded-xl border-4 border-black p-4 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform rotate-1">
-              <h3 className="text-xl font-heading">{aboutSection.firstBoxTitle}</h3>
+              <h3 className="text-xl font-heading">{data.firstBoxTitle}</h3>
               <p className="text-black">
-                {aboutSection.firstBoxDescription}
+                {data.firstBoxDescription}
               </p>
             </div>
             <div className="bg-white rounded-xl border-4 border-black p-4 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform -rotate-1">
-              <h3 className="text-xl font-heading">{aboutSection.secondBoxTitle}</h3>
+              <h3 className="text-xl font-heading">{data.secondBoxTitle}</h3>
               <p className="text-black">
-                {aboutSection.secondBoxDescription}
+                {data.secondBoxDescription}
               </p>
             </div>
             <div className="bg-white rounded-xl border-4 border-black p-4 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform rotate-1">
-              <h3 className="text-xl font-heading">{aboutSection.thirdBoxTitle}</h3>
+              <h3 className="text-xl font-heading">{data.thirdBoxTitle}</h3>
               <p className="text-black">
-                {aboutSection.thirdBoxDescription}
+                {data.thirdBoxDescription}
               </p>
             </div>
           </div>
