@@ -44,13 +44,16 @@ export default buildConfig({
         if (globalConfig?.slug === 'team-members-section') {
           return `${baseUrl}/#team`;
         }
+        if (globalConfig?.slug === 'news-global') {
+          return `${baseUrl}/#news`;
+        }
         return baseUrl;
       },
-      globals: ['about-section', 'team-members-section', 'fixtures-section', 'get-in-touch'],
+      globals: ['about-section', 'team-members-section', 'fixtures-section', 'news-global', 'get-in-touch'],
     },
   },
   collections: [Users, Media, NewsArticles, TeamMembers, Fixtures, ProfilePicture, OpponentPicture],
-  globals: [GetIntouchGlobal, AboutSectionGlobal, FixturesSectionGlobal, TeamMembersSectionGlobal],
+  globals: [GetIntouchGlobal, AboutSectionGlobal, FixturesSectionGlobal, TeamMembersSectionGlobal, NewsGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   sharp: sharp as any,
