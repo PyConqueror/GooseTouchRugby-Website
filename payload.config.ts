@@ -13,6 +13,9 @@ import { TeamMembers } from './collections/TeamMembers.ts'
 import { Fixtures } from './collections/Fixtures.ts'
 import { NewsGlobal } from './globals/NewsGlobal.ts'
 import { GetIntouchGlobal } from './globals/GetInTouchGlobal.ts'
+import { AboutSectionGlobal } from './globals/AboutGlobal.ts'
+import { FixturesSectionGlobal } from './globals/FixturesSectionGlobal.ts'
+import { TeamMembersSectionGlobal } from './globals/TeamMembersSectionGlobal.ts'
 import { ProfilePicture } from './collections/ProfilePicture.ts'
 import { OpponentPicture } from './collections/OpponentPicture.ts'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
@@ -26,9 +29,31 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    livePreview: {
+      url: ({ globalConfig }) => {
+        const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || '';
+        if (globalConfig?.slug === 'get-in-touch') {
+          return `${baseUrl}/#contact`;
+        } 
+        if (globalConfig?.slug === 'about-section') {
+          return `${baseUrl}/#about`;
+        }
+        if (globalConfig?.slug === 'fixtures-section') {
+          return `${baseUrl}/#fixtures`;
+        }
+        if (globalConfig?.slug === 'team-members-section') {
+          return `${baseUrl}/#team`;
+        }
+        if (globalConfig?.slug === 'news-global') {
+          return `${baseUrl}/#news`;
+        }
+        return baseUrl;
+      },
+      globals: ['about-section', 'team-members-section', 'fixtures-section', 'news-global', 'get-in-touch'],
+    },
   },
   collections: [Users, Media, NewsArticles, TeamMembers, Fixtures, ProfilePicture, OpponentPicture],
-  globals: [NewsGlobal, GetIntouchGlobal],
+  globals: [GetIntouchGlobal, AboutSectionGlobal, FixturesSectionGlobal, TeamMembersSectionGlobal, NewsGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   sharp: sharp as any,

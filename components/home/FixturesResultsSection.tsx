@@ -3,11 +3,11 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, ChevronRight } from "lucide-react"
-import { Fixture as FixtureType } from "@/payload-types"
+import { FixturesSectionGlobal as FixturesSectionGlobalType, Fixture as FixtureType } from "@/payload-types"
 import { formatDate, formatTime } from "@/utilities/dateUtils"
 
-export function FixturesResultsSection({ fixtures }: { fixtures: FixtureType[] }) {
-  const matches = fixtures as FixtureType[]
+export function FixturesResultsSection({ data }: { data: FixturesSectionGlobalType }) {
+  const matches = data.featuredFixtures as FixtureType[]
 
   return (
     <section id="fixtures" className="w-full py-12 md:py-24 lg:py-32 bg-white relative">

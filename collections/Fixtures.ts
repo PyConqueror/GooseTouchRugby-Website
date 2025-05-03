@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache';
 export const Fixtures: CollectionConfig = {
   slug: 'fixtures',
   admin: {
-    useAsTitle: 'modifedTitle',
+    useAsTitle: 'opponent',
     defaultColumns: ['opponent', 'date', 'status', 'location'],
     description: 'Upcoming and past rugby match details.',
   },

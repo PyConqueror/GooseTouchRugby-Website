@@ -8,14 +8,12 @@ import { NewsArticle as NewsArticleType, NewsGlobal as NewsGlobalType } from "@/
 import { NewsModal } from "@/components/shared/NewsModal"
 import { NewsCard } from "@/components/shared/NewsCard"
 
-interface NewsSectionProps {
-  data: NewsGlobalType[];
-}
 
-export function NewsSection({ data }: NewsSectionProps) {
+
+export function NewsSection({ data }: { data: NewsGlobalType }) {
   const [selectedArticle, setSelectedArticle] = useState<NewsArticleType | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const newsArticles = (data as NewsArticleType[])
+  const newsArticles = data.featuredNews as NewsArticleType[]
 
   const openArticle = (article: NewsArticleType) => {
     setSelectedArticle(article)

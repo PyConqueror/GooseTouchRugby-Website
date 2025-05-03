@@ -27,6 +27,9 @@ export interface Config {
   globals: {
     'news-global': NewsGlobal;
     'get-in-touch': GetInTouch;
+    'about-section': AboutSectionGlobal;
+    'fixtures-section': FixturesSectionGlobal;
+    'team-members-section': TeamMembersSectionGlobal;
   };
   locale: null;
   user: User & {
@@ -255,6 +258,49 @@ export interface GetInTouch {
   whatsapp?: string | null;
   twitter?: string | null;
   globalType?: 'get-in-touch';
+}
+
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-section".
+ */
+export interface AboutSectionGlobal {
+  id: string;
+  description?: string | null;
+  firstBoxTitle?: string | null;
+  firstBoxDescription?: string | null;
+  secondBoxTitle?: string | null;
+  secondBoxDescription?: string | null;
+  thirdBoxTitle?: string | null;
+  thirdBoxDescription?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published');
+  globalType?: 'about-section';
+}
+
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "fixtures-section".
+ */
+export interface FixturesSectionGlobal {
+  id: string;
+  featuredFixtures?: (string | Fixture)[] | null;
+  updatedAt: string;
+  createdAt: string;
+  globalType?: 'fixtures-section';
+}
+
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members-section".
+ */
+export interface TeamMembersSectionGlobal {
+  id: string;
+  featuredTeamMembers?: (string | TeamMember)[] | null;
+  updatedAt: string;
+  createdAt: string;
+  globalType?: 'team-members-section';
 }
 
 declare module 'payload' {

@@ -2,10 +2,12 @@
 
 import Image from "next/image"
 import { TeamMembersCarousel } from "./TeamMembersCarousel"
-import type { TeamMember as TeamMemberType } from "@/payload-types"
+import type { TeamMembersSectionGlobal as TeamMemberSectionType, TeamMember as TeamMemberType } from "@/payload-types"
 
 
-export function PlayerSection({ teamMembers }: { teamMembers: TeamMemberType[] }) {
+export function PlayerSection({ data }: { data: TeamMemberSectionType }) {
+
+  const teamMembers = data.featuredTeamMembers as TeamMemberType[]
   return (
     <section id="team" className="w-full py-12 md:py-24 lg:py-32 bg-yellow-50 relative">
       <div className="absolute top-10 left-10 w-20 h-20 md:w-32 md:h-32">

@@ -1,8 +1,8 @@
 "use client"
-
 import Image from "next/image"
+import { AboutSectionGlobal  as AboutSectionGlobalType } from "@/payload-types"
 
-export function AboutSection() {
+export function AboutSection({ data }: { data: AboutSectionGlobalType }) {
   return (
     <section id="about" className="w-full py-12 md:py-24 lg:py-32 bg-white relative">
       <div className="container px-4 md:px-6">
@@ -13,8 +13,7 @@ export function AboutSection() {
             </h2>
           </div>
           <p className="max-w-[900px] text-black md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed font-medium">
-            Goose Touch Rugby was founded in 2020 with a mission to create an inclusive environment for rugby
-            enthusiasts of all skill levels.
+            {data.description}
           </p>
         </div>
         <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
@@ -30,22 +29,21 @@ export function AboutSection() {
           </div>
           <div className="flex flex-col justify-center space-y-6">
             <div className="bg-white rounded-xl border-4 border-black p-4 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform rotate-1">
-              <h3 className="text-xl font-heading">Our Philosophy</h3>
+              <h3 className="text-xl font-heading">{data.firstBoxTitle}</h3>
               <p className="text-black">
-                We believe in the power of rugby to build character, promote fitness, and create lasting
-                friendships.
+                {data.firstBoxDescription}
               </p>
             </div>
             <div className="bg-white rounded-xl border-4 border-black p-4 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform -rotate-1">
-              <h3 className="text-xl font-heading">Inclusive Environment</h3>
+              <h3 className="text-xl font-heading">{data.secondBoxTitle}</h3>
               <p className="text-black">
-                Whether you're a seasoned player or new to the sport, there's a place for you in our team.
+                {data.secondBoxDescription}
               </p>
             </div>
             <div className="bg-white rounded-xl border-4 border-black p-4 shadow-[4px_4px_0px_rgba(0,0,0,1)] transform rotate-1">
-              <h3 className="text-xl font-heading">Community Focus</h3>
+              <h3 className="text-xl font-heading">{data.thirdBoxTitle}</h3>
               <p className="text-black">
-                Beyond the field, we're committed to giving back to our local community through various initiatives.
+                {data.thirdBoxDescription}
               </p>
             </div>
           </div>

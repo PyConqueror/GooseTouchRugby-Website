@@ -3,6 +3,9 @@ import { revalidatePath } from 'next/cache';
 
 export const TeamMembers: CollectionConfig = {
   slug: 'team-members',
+  admin: {
+    useAsTitle: 'name',
+  },
   access: {
     read: () => true,
   },
