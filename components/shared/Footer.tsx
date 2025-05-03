@@ -15,7 +15,7 @@ export function Footer() {
           href="https://www.wanaqim.dev"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm font-medium text-black hover:underline underline-offset-4"
+          className="text-sm font-medium text-black underline underline-offset-4"
         >
           Built and managed by Wan Aqim ©
         </Link>
