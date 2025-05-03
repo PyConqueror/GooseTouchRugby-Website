@@ -21,11 +21,8 @@ export default async function Home() {
     depth: 1,
   })
 
-  const teamMembers = await (await payload).find({
-    collection: "team-members",
-    limit: 8,
-    depth: 1,
-    sort: "order",
+  const teamMembers = await (await payload).findGlobal({
+    slug: "team-members-section",
   })
 
   const fixtures = await (await payload).findGlobal({
@@ -47,7 +44,7 @@ export default async function Home() {
       <main className="flex-1">
         <HeroSection />
         <AboutSection aboutSection={aboutSection} />
-        <PlayerSection teamMembers={teamMembers.docs}/>
+        <PlayerSection data={teamMembers}/>
         <FixturesResultsSection data={fixtures} />
         <NewsSection data={newsArticles.docs} />
         <GetInTouchSection data={getInTouch} />
